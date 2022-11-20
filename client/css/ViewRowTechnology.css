@@ -1,0 +1,6 @@
+.ViewRowTechnology_txtTechnology,
+.ViewRowTechnology_txtTypeTechnology,
+.ViewRowTechnology_txtDescription{
+    color: green;
+    margin-right: 1rem;
+}

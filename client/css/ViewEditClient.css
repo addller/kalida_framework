@@ -1,0 +1,57 @@
+.ViewEditClient_view{
+    padding: 1rem;
+    max-width: 60rem;
+    margin: auto;
+}
+
+.ViewEditClient_txtEditUser{
+    text-align: center;
+}
+
+.ViewEditClient_lblName,
+.ViewEditClient_lblEmail,
+.ViewEditClient_lblUsername,
+.ViewEditClient_lblNickName,
+.ViewEditClient_lblLang{
+    color: blue;
+}
+
+.ViewEditClient_inputUpdateName,
+.ViewEditClient_inputUpdateEmail{
+    display: block;
+    width: 98%;
+    margin-bottom: 1rem;
+}
+
+.ViewEditClient_inputUpdateUsername,
+.ViewEditClient_inputUpdateNickName,
+.ViewEditClient_inputUpdateLang{
+    margin-left: 1rem;
+}
+
+.ViewEditClient_groupNames{
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.ViewEditClient_inputUpdateUsername,
+.ViewEditClient_inputUpdateLang{
+    margin-right: 1rem;
+}
+
+.ViewEditClient_inputUpdateLang{
+    width: 17.1rem;
+}
+
+.ViewEditClient_btnEditUser,
+.ViewEditClient_btnBack{
+    display: block;
+    width: 20rem;
+}
+
+.ViewEditClient_groupButtons{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: center;
+    gap: 1rem;
+}

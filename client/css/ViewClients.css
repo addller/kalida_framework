@@ -1,0 +1,20 @@
+.JTable_view{
+    margin: auto;
+    margin-left: 1rem;
+    border: 1px solid black;
+}
+
+.JTable_th{
+    color: blue;
+    border: 1px solid blue;
+    padding: .5rem;
+    background-color: #ccc;
+}
+
+.ViewClients_divControls{
+    border: 3px solid green;
+    margin: 1rem;
+    padding: .4rem;
+}
+
+

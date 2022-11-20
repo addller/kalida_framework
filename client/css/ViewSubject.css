@@ -1,0 +1,9 @@
+.ViewSubject_txtSubject{
+    text-decoration: underline;
+    text-indent: 1rem;
+    cursor: pointer;
+}
+
+.ViewSubject_txtSubject:hover{
+    color: blue;
+}

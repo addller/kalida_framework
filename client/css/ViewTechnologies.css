@@ -1,0 +1,13 @@
+.JTable_view{
+    margin: auto;
+    margin-left: 1rem;
+    border: 1px solid black;
+}
+
+.JTable_th{
+    color: green;
+    border: 1px solid green;
+    padding: .5rem;
+    background-color: #ccc;
+}
+

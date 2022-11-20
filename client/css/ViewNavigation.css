@@ -1,0 +1,38 @@
+.ViewNavigation_view{
+    padding-top: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.ViewNavigation_iconHome,
+.ViewNavigation_iconSummary{
+    background: url(../img/sprite_icons_m.png);
+    margin-left: .6rem;
+    width: 30px;
+    height: 30px;
+}
+
+.ViewNavigation_item:hover{
+    color: blue;
+    background-color: #ccc;
+}
+
+.ViewNavigation_item{
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid blue;
+    border-right: 1px solid blue;
+    width: 95%;
+    margin: auto;
+    padding-top: .5rem;
+    border-radius: 5px;
+}
+.ViewNavigation_iconHome{
+    background-position: -17px -237px;
+}
+
+.ViewNavigation_iconSummary{
+    background-position: -18px -308px;
+}

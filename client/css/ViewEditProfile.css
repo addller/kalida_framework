@@ -1,0 +1,50 @@
+.ViewEditProfile_view{
+    border: 3px solid green;
+    padding: 1rem;
+}
+
+.ViewEditProfile_txtEditProfile{
+    text-align: center;
+}
+
+.ViewEditProfile_lblName,
+.ViewEditProfile_lblEmail,
+.ViewEditProfile_lblUsername,
+.ViewEditProfile_lblNickName,
+.ViewEditProfile_lblLang{
+    color: blue;
+}
+
+.ViewEditProfile_inputUpdateName,
+.ViewEditProfile_inputUpdateEmail{
+    display: block;
+    width: 98%;
+    margin-bottom: 1rem;
+}
+
+.ViewEditProfile_inputUpdateUsername,
+.ViewEditProfile_inputUpdateNickName,
+.ViewEditProfile_inputUpdateLang{
+    margin-left: 1rem;
+}
+
+.ViewEditProfile_groupNames{
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.ViewEditProfile_inputUpdateUsername,
+.ViewEditProfile_inputUpdateLang{
+    margin-right: 1rem;
+}
+
+.ViewEditProfile_inputUpdateLang{
+    width: 17.1rem;
+}
+
+.ViewEditProfile_btnEditProfile{
+    display: block;
+    width: 20rem;
+    margin:auto;
+    margin-top: 1rem;
+}

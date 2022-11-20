@@ -1,0 +1,58 @@
+body{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3.6rem 1fr;
+    height: 99.4vh;
+    padding: 1px;
+    margin: 1px;
+    gap: .1rem;
+    font-size: 1.5rem;
+}
+
+.ViewSignUp_view{
+    max-width: 60rem;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+.ViewSignUp_txtRegister{
+    text-align: center;
+    font-weight: bold;
+}
+
+.ViewSignUp_lblEmail,
+.ViewSignUp_lblName{
+    display: block;
+}
+
+.ViewSignUp_inputEmail,
+.ViewSignUp_inputName{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.ViewSignUp_lblUsername,
+.ViewSignUp_lblPassword{
+    margin-right: 1rem;
+}
+
+
+.ViewSignUp_inputUsername,
+.ViewSignUp_inputNickName,
+.ViewSignUp_inputPassword,
+.ViewSignUp_inputLang{
+    margin-left: 1rem;
+}
+
+
+.ViewSignUp_groupPasswordAndLang{
+    margin: 1rem 0;
+}
+
+.ViewSignUp_groupButtons{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
