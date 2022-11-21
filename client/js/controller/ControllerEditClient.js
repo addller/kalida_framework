@@ -45,7 +45,7 @@ class ControllerEditClient extends JMount{
                             message = LANG.user_saved;
 
                         new Dialog(message, title, () => {
-                            redirect('users')
+                            redirect('clients')
                         }).hideBtnNegate(LANG.close).show();
                     },
                     error => new Aspect(error),
