@@ -1,12 +1,16 @@
 package com.kalida.exception;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 
 @Getter
@@ -17,31 +21,39 @@ public class StandardError implements Serializable {
     private long timestamp = System.currentTimeMillis();
     private String message;
     private String path;
-    private String error;
-
+    private String exception;
+    private List<String> errorsList = new ArrayList<>();
     private transient HttpStatus httpStatus;
-    private static String WRAP_EXCEPTION = WrapException.class.getSimpleName();
-    private static String DOMAIN_EXCEPTION = DomainException.class.getSimpleName();
+
+    @Getter(value = AccessLevel.NONE)
+    private static final String WRAP_EXCEPTION = WrapException.class.getSimpleName();
+    
+    @Getter(value = AccessLevel.NONE)
+    private static final String DOMAIN_EXCEPTION = DomainException.class.getSimpleName();
 
     public StandardError(Exception exception, HttpServletRequest request){
         this(exception, request, null);
     }
     public StandardError(Exception exception, HttpServletRequest request, HttpStatus httpStatus){
-        this(exception, request, httpStatus, null);
+        this(exception, request.getRequestURI(), httpStatus, null);
     }
 
     public StandardError(Exception exception, HttpServletRequest request, HttpStatus httpStatus, String message){
-        this.error = exception.getClass().getSimpleName();
-        this.path = request.getRequestURI();
-        if(error.equals(WRAP_EXCEPTION)){
+        this(exception, request.getRequestURI(), httpStatus, message);
+    }
+
+    public StandardError(Exception exception, String requestedURI, HttpStatus httpStatus, String message){
+        this.exception = exception.getClass().getSimpleName();
+        this.path = requestedURI;
+        if(exception.equals(WRAP_EXCEPTION)){
             WrapException wException = (WrapException) exception;
             message = message != null? message : wException.getMessage();
-            this.error = wException.getError();
+            this.exception = wException.getError();
         }
         this.message = message != null? message : exception.getMessage();
-        if(error.equals(DOMAIN_EXCEPTION) && httpStatus == null)
+        if(exception.equals(DOMAIN_EXCEPTION) && httpStatus == null)
             httpStatus = ((DomainException) exception).getHttpStatus();
-        this.httpStatus = this.httpStatus != null? httpStatus : HttpStatus.INTERNAL_SERVER_ERROR;            
+        this.httpStatus = httpStatus != null? httpStatus : HttpStatus.INTERNAL_SERVER_ERROR;            
     }
 
     ResponseEntity<StandardError> response(){
@@ -57,7 +69,12 @@ public class StandardError implements Serializable {
     static ResponseEntity<StandardError> response(Exception exception, HttpServletRequest request, HttpStatus httpStatus, String message){
         return new StandardError(exception, request, httpStatus, message).response();
     }
+    
+    public void addError(String ... errors){
+        errorsList.addAll(Arrays.asList(errors));
+    }
 
-
-        
+    public void addAllErrors(List<String> errors){
+        errorsList.addAll(errors);
+    }
 }
