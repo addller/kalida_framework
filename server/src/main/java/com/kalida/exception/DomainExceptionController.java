@@ -1,9 +1,5 @@
 package com.kalida.exception;
 
-import java.net.http.HttpHeaders;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -22,12 +18,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public final class DomainExceptionController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DomainException.class)
-    public final ResponseEntity<StandardError> handleDomainException(DomainException domainException, HttpServletRequest request) {
+    public final ResponseEntity<StandardError> handleDomainException(DomainException domainException,
+            HttpServletRequest request) {
         return StandardError.response(domainException, request);
     }
-    
+
     @ExceptionHandler(AccessDeniedException.class)
-    public final ResponseEntity<StandardError> handleAccessDeniedException(AccessDeniedException ex, HttpServletRequest request) {
+    public final ResponseEntity<StandardError> handleAccessDeniedException(AccessDeniedException ex,
+            HttpServletRequest request) {
         return StandardError.response(ex, request);
     }
 
@@ -39,7 +37,7 @@ public final class DomainExceptionController extends ResponseEntityExceptionHand
         standardError.setErrors(ex.getBindingResult().getFieldErrors());
         return new ResponseEntity<>(standardError, status);
     }
-    
+
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<StandardError> handleException(Exception ex, HttpServletRequest request) {
         return StandardError.response(ex, request);

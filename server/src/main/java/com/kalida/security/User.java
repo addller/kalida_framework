@@ -34,7 +34,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "users")
-public class User implements UserDetails{
+public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -79,15 +79,15 @@ public class User implements UserDetails{
     @Column(name = "email", length = 255)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     private ImgPerfil imgPerfil;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval=true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Experience> experiences;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval=true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Notification> notifications;
 
     public List<String> getRoles() {
