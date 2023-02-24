@@ -27,7 +27,7 @@ public final class DomainExceptionController extends ResponseEntityExceptionHand
     }
     
     @ExceptionHandler(AccessDeniedException.class)
-    public final ResponseEntity<StandardError> handleDomainException(AccessDeniedException ex, HttpServletRequest request) {
+    public final ResponseEntity<StandardError> handleAccessDeniedException(AccessDeniedException ex, HttpServletRequest request) {
         return StandardError.response(ex, request);
     }
 
@@ -36,18 +36,12 @@ public final class DomainExceptionController extends ResponseEntityExceptionHand
             org.springframework.http.HttpHeaders headers, HttpStatus status, WebRequest request) {
         String path = ((ServletWebRequest) request).getRequest().getRequestURI();
         var standardError = new StandardError(ex, path, status, "validation errors");
-        List<String> errors = ex.getAllErrors()
-                .stream()
-                .map(error -> error.getDefaultMessage())
-                .collect(Collectors.toList());
-                
-        standardError.addAllErrors(errors);
-        return new ResponseEntity<Object>(standardError, status);
+        standardError.setErrors(ex.getBindingResult().getFieldErrors());
+        return new ResponseEntity<>(standardError, status);
     }
     
-
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<StandardError> handleDomainException(Exception ex, HttpServletRequest request) {
+    public final ResponseEntity<StandardError> handleException(Exception ex, HttpServletRequest request) {
         return StandardError.response(ex, request);
     }
 }
