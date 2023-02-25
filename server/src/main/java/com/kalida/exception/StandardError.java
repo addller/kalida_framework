@@ -10,13 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.beans.factory.annotation.Value;
+
 
 import lombok.AccessLevel;
 import lombok.Getter;
 
+@Component
 @Getter
 public class StandardError implements Serializable {
 
@@ -25,6 +29,9 @@ public class StandardError implements Serializable {
     @JsonIgnore
     private long timestamp = System.currentTimeMillis();
 
+    @Value("${security.hide.exception}")
+    private boolean hideException;
+
     private String path;
     private HttpStatus httpStatus;
     private String exception;
@@ -32,61 +39,40 @@ public class StandardError implements Serializable {
     private Map<String, List<String>> errors = new HashMap<>();
 
     @Getter(value = AccessLevel.NONE)
-    private static final String WRAP_EXCEPTION = WrapException.class.getSimpleName();
-
-    @Getter(value = AccessLevel.NONE)
     private static final String DOMAIN_EXCEPTION = DomainException.class.getSimpleName();
 
-    public StandardError(Exception exception, HttpServletRequest request) {
-        this(exception, request, null);
+    public ResponseEntity<StandardError> response(Exception exception, HttpServletRequest request) {
+        return response(exception, request, null);
     }
 
-    public StandardError(Exception exception, HttpServletRequest request, HttpStatus httpStatus) {
-        this(exception, request.getRequestURI(), httpStatus, null);
+    public ResponseEntity<StandardError> response(Exception exception, HttpServletRequest request, HttpStatus httpStatus) {
+        return response(exception, request.getRequestURI(), httpStatus, null);
     }
 
-    public StandardError(Exception exception, HttpServletRequest request, HttpStatus httpStatus, String message) {
-        this(exception, request.getRequestURI(), httpStatus, message);
+    public ResponseEntity<StandardError> response(Exception exception, HttpServletRequest request, HttpStatus httpStatus, String message) {
+        return response(exception, request.getRequestURI(), httpStatus, message);
     }
 
-    public StandardError(Exception exception, String requestedURI, HttpStatus httpStatus, String message) {
+    public ResponseEntity<StandardError> response(Exception exception, String requestedURI, HttpStatus httpStatus, String message) {
         this.exception = exception.getClass().getSimpleName();
         this.path = requestedURI;
-        if (this.exception.equals(WRAP_EXCEPTION)) {
-            WrapException wException = (WrapException) exception;
-            message = message != null ? message : wException.getMessage();
-            this.exception = wException.getSimpleExceptionName();
-            if(httpStatus == null) httpStatus = wException.getHttpStatus();
-        }
         this.message = message != null ? message : exception.getMessage();
+        
         if (this.exception.equals(DOMAIN_EXCEPTION) && httpStatus == null)
             httpStatus = ((DomainException) exception).getHttpStatus();
-        this.httpStatus = httpStatus != null ? httpStatus : HttpStatus.INTERNAL_SERVER_ERROR;
-    }
+            
+        if(hideException) 
+            this.exception = "exception";
 
-    ResponseEntity<StandardError> response() {
+        this.httpStatus = httpStatus != null ? httpStatus : HttpStatus.INTERNAL_SERVER_ERROR;
         return new ResponseEntity<>(this, this.httpStatus);
     }
 
-    static ResponseEntity<StandardError> response(Exception exception, HttpServletRequest request) {
-        return new StandardError(exception, request).response();
-    }
-
-    static ResponseEntity<StandardError> response(Exception exception, HttpServletRequest request,
-            HttpStatus httpStatus) {
-        return new StandardError(exception, request, httpStatus).response();
-    }
-
-    static ResponseEntity<StandardError> response(Exception exception, HttpServletRequest request,
-            HttpStatus httpStatus, String message) {
-        return new StandardError(exception, request, httpStatus, message).response();
-    }
-
-    public void setErrors(List<FieldError> fieldErrors){
+    public StandardError setErrors(List<FieldError> fieldErrors){
         fieldErrors.forEach(error -> {
             errors.putIfAbsent(error.getField(), new ArrayList<>());
             errors.get(error.getField()).add(error.getDefaultMessage());
         });
+        return this;
     }
-
 }

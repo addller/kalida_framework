@@ -32,39 +32,4 @@ public class DomainException extends RuntimeException {
         return httpStatus;
     }
 
-    public static void keys(JSONObject data, String... keys) {
-        for (String key : keys) {
-            if (!data.containsKey(key)) {
-                throw new DomainException("Key [" + key + "] not found on json");
-            }
-        }
-    }
-
-    public static void areNumberKeys(JSONObject data, String... keys) {
-        keys(data, keys);
-        String tKey = null;
-        try {
-            for (String key : keys) {
-                tKey = key;
-                data.getAsNumber(tKey);
-            }
-        } catch (Exception e) {
-            throw new DomainException("The key [" + tKey + "] is not a number: " + data.getAsString(tKey), HttpStatus.BAD_REQUEST);
-        }
-    }
-    
-
-    public static void allJSONKeys(JSONObject data, String[] numberKeys, String... stringKeys) {
-        keys(data, stringKeys);
-        areNumberKeys(data, numberKeys);
-    }
-
-    public static void propagate(String error) {
-        propagate(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    public static void propagate(String error, HttpStatus httpStatus) {
-        throw new DomainException(error, httpStatus);
-    }
-
 }
