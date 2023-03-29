@@ -2,8 +2,6 @@ package com.kalida.exception;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,19 +22,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestController
 public final class DomainExceptionController extends ResponseEntityExceptionHandler {
 
-    @Autowired
-    private StandardError standardError;
-
     @ExceptionHandler(DomainException.class)
     public final ResponseEntity<StandardError> handleDomainException(DomainException domainException,
             HttpServletRequest request) {
-        return standardError.response(domainException, request);
+        return StandardError.response(domainException, request);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public final ResponseEntity<StandardError> handleAccessDeniedException(AccessDeniedException ex,
             HttpServletRequest request) {
-        return standardError.response(ex, request);
+        return StandardError.response(ex, request);
     }
 
     @Override
@@ -44,14 +39,13 @@ public final class DomainExceptionController extends ResponseEntityExceptionHand
             HttpHeaders headers, HttpStatus status, WebRequest request) {
         String path = ((ServletWebRequest) request).getRequest().getRequestURI();
         List<FieldError> errors = ex.getBindingResult().getFieldErrors();
-        standardError
-            .setErrors(errors)
-            .response(ex, path, status, "validation errors");
-        return new ResponseEntity<>(standardError, status);
+        StandardError standardError = new StandardError(ex, path, status, "validation errors")
+                .setErrors(errors);
+        return new ResponseEntity<>(standardError, standardError.getHttpStatus());
     }
     
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<StandardError> handleException(Exception ex, HttpServletRequest request) {
-        return standardError.response(ex, request);
+        return StandardError.response(ex, request);
     }
 }
