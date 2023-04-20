@@ -1,0 +1,1683 @@
+{
+	"jRequest inSequence": {
+		"scope": "javascript,typescript",
+		"prefix": ["jRequest inSequence", "My Snippets"],
+		"body": [
+			"let source = view$1.viewValues_(${2:true}),",
+			"\tenderessable = API_$3.to$4;",
+			"${5:if(view$1.isUpdated_()) return}",
+			"",
+			"JRequest.prepare(enderessable, source)",
+				"\t.inSequence(",
+					"\t\tonbefore => {},",
+					"\t\tonready => {},",
+					"\t\t${6:onsuccess} => {$7},",
+					"\t\terror => new Aspect(error),",
+					"\t\tonafter => {}",
+				").${8:get}()$0"
+		],
+		"description": "JRequest inSequence"
+	},
+	"jRequest inResponse": {
+		"scope": "javascript,typescript",
+		"prefix": ["jRequest inResponse", "My Snippets"],
+		"body": [
+			"let source = view$1.viewValues_(${2:true}),",
+			"\tenderessable = API_$3.to$4;",
+			"",
+			"${5:if(view$1.isUpdated_()) return}",
+			"JRequest.prepare(enderessable, source)",
+				"\t.inResponse(",
+					"\t\t${6:onsuccess} => {$7},",
+					"\t\terror => new Aspect(error),",
+					"\t\tonafter => {}",
+				").${8:get}()$0"
+		],
+		"description": "JRequest inResponse"
+	},
+	"jRequest prepare": {
+		"scope": "javascript,typescript",
+		"prefix": ["jRequest prepare", "My Snippets"],
+		"body": [
+			"let source = view$1.viewValues_(),",
+			"\tenderessable = API_$2.to$3;",
+			"",
+			"if(view$1.isUpdated_()) return",
+			"let jRequest = JRequest.prepare(enderessable, source);",
+				"\tjRequest.onbefore = ajax => {}",
+				"\tjRequest.onready = details => {}",
+				"\tjRequest.onsuccess = ${4:details} => {$5}",
+				"\tjRequest.onerror = error => new Aspect(error)",
+				"\tjRequest.onafter = details => {}",
+				"\tjRequest.${6:get}()$0"
+		],
+		"description": "JRequest prepare"
+	},
+	"vValidate, validationValidate  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["vValidate","validationValidate", "My Snippets"],
+		"body": [
+			"${1:consume(e)}",
+			"let validation = Validation.validate([",
+			"\t$2",
+			"])${3:.showError};",
+			"\nif(validation.isValid){\n\t$0\n}"
+		],
+		"description": "Validations.validate based in TAG.js"
+	},
+	"vOverInput, validationOverInput  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["vOverInput","validationOverInput", "My Snippets"],
+		"body": [
+			"Validation.overInput(${1:v}.input$2, [",
+			"\t$3",
+			"])$0",
+		],
+		"description": "Validations.overInput based in TAG.js"
+	},
+	"vOverValue, validationOverValue  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["vOverValue","validationOverValue", "My Snippets"],
+		"body": [
+			"Validation.overValue(${1:value}, [",
+			"\t$2",
+			"])$0"
+		],
+		"description": "Validation.overValue based in TAG.js"
+	},
+	"vInstance, ValidationInstance  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["vInstance, ValidationInstance", "My Snippets"],
+		"body": [
+			"new Validation(${1:confirm}, ${2:hint})$0"
+		],
+		"description": "Validations of TAG.js.\nCreates a Validation instance"
+	},
+	"vFromArray, ValidationFromArray  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["vFromArray", "ValidationFromArray", "My Snippets"],
+		"body": [
+			"[${1:value} => ${2:$1}.$3, ${4:hint}]$0"
+		],
+		"description": "Validations of TAG.js.\nCreates an array base to create a instance of Validation"
+	},
+	"vShowError, ValidationShowError Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["vShowError", "ValidationShowError", "My Snippets"],
+		"body": [
+			"showError(${1:doOverAll}, ${2:doFocus}, ${3:toastDuration}, ${4:cssToast})$0"
+		],
+		"description": "Validations of TAG.js.\nCreates an array base to create a instance of Validation"
+	},
+	"class Controller Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["class Controller", "My Snippets"],
+		"body": [
+			"class ${TM_FILENAME_BASE} extends JMount{",
+			"\tconstructor(){",
+			"\t\tsuper().mount_()",
+			"\t}\n",
+			"\t_init(){",
+			"\t\tthis.actionSet = new ActionSet($1)",
+			"\t\t$0",
+			"\t}\n",
+			"\t_appends(){\n\t\t\n\t}\n",
+			"\t_events(){\n\t\t\n\t}\n",
+			"\t_requests(){\n\t\t\n\t}\n",
+			"}"
+		],
+		"description": "Create a Controller based in tagMount method"
+	},
+	"class View  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["class View", "My Snippets"],
+		"body": [
+			"class View${1:${TM_FILENAME_BASE/view(.*)/$1/i}} extends JView{",
+			"\tconstructor(${2:entity}){",
+			"\t\tsuper($2).mount_()",
+			"\t}\n",
+			"\t_init(){",
+			"\t\t$0",
+			"\t}\n",
+			"\t_events(){",
+			"\t\t//only for simple actions",
+			"\t\t//events should be handled preferently by a Controller or an Action class",
+			"\t}\n",
+			"\t_limits(){\n\t\t\n\t}\n",
+			"}"
+		],
+		"description": "Create a View based in tagMount method"
+	},
+	"viewValidate  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["viewValidate", "My Snippets"],
+		"body": [
+			"${1:consume(e)}",
+			"let validation = view._validate();",
+			"if(validation.isValid){",
+				"\t${0:ajaxReady}",
+			    "\t//return",
+			"}",
+			"//return"
+		],
+		"description": "Create a View based in tagMount method"
+	},
+	"transitorySuccess  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["transitorySuccess", "My Snippets"],
+		"body": [
+			"transitorySuccess(${1:response}, ${2:elementInput}, ${3:durationInSeconds}, ${4:cssSuccess}, ${5:cssError}, ${6:blockFocus})$0"
+		],
+		"description": "TAG function transitory success. Used to add a css class success, that is removed after some time"
+	},
+	"Dialog Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["new Dialog", "My Snippets"],
+		"body": [
+			"let title = ${1:title},",
+			"\tmessage = ${2:message};",
+			"new Dialog(message, title, () => {",
+				"\t${3://do something if approve, remember add css}",
+			"}).show();"
+		],
+		"description": "TAG dialog"
+	},
+	"toastOverResponse  Snippet": {
+		
+		"scope": "javascript,typescript",
+		"prefix": ["toastOverResponse", "My Snippets"],
+		"body": [
+			"toastOverResponse(${1:response}, ${2:message}, ${3:toastDuration}, ${4:elementFocus}, ${5:cssSuccess}, ${6:cssError})$0"
+		],
+		"description": "TAG function toast"
+	},
+	"CSS view Snippet": {
+		
+		"scope": "css",
+		"prefix": ["view", "My Snippets"],
+		"body": [
+			".${TM_FILENAME_BASE}_${1:nameVariable}{\n\t$0\n}\n"
+		],
+		"description": "Create a css class based in file name of css"
+	},
+	"new Controller  HtmlSnippet": {
+		
+		"scope": "html",
+		"prefix": ["new Controller", "My Snippets"],
+		"body": [
+			"<script>",
+        	"\tnew Controller$2${1:${TM_FILENAME_BASE}}()$0",
+        	"</script>"
+		],
+		"description": "Invoke a css class based in file name of css"
+	},
+	"new css python HtmlSnippet": {
+		
+		"scope": "html",
+		"prefix": ["new css", "My Snippets"],
+		"body": [
+			"<link href=\"{{url_for('static', filename='css/${1:View}.css')}}\" type=\"text/css\" rel='stylesheet'>"
+		],
+		"description": "create link css html based in python"
+	},
+	"new script python HtmlSnippet": {
+		"scope": "html",
+		"prefix": ["new script", "My Snippets"],
+		"body": [
+			"<script src=\"{{url_for('static', filename='js/${1|view,controller,action,aspect,dev,lang|}/$2.js')}}\"></script>\n$0"
+		],
+		"description": "create script html based in python"
+	},
+	"E.a E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.a", "E.", "E.Snippets"]
+	,	"body": [
+			"E.a()$0"
+		],
+		"description": "create [a] HTML element"
+	},
+	"E.area E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.area", "E.", "E.Snippets"]
+	,	"body": [
+			"E.area()$0"
+		],
+		"description": "create [area] HTML element"
+	},
+	"E.article E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.article", "E.", "E.Snippets"]
+	,	"body": [
+			"E.article()$0"
+		],
+		"description": "create [article] HTML element"
+	},
+	"E.aside E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.aside", "E.", "E.Snippets"]
+	,	"body": [
+			"E.aside()$0"
+		],
+		"description": "create [aside] HTML element"
+	},
+	"E.audio E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.audio", "E.", "E.Snippets"]
+	,	"body": [
+			"E.audio()$0"
+		],
+		"description": "create [audio] HTML element"
+	},
+	"E.br E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.br", "E.", "E.Snippets"]
+	,	"body": [
+			"E.br()$0"
+		],
+		"description": "create [br] HTML element"
+	},
+	"E.canvas E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.canvas", "E.", "E.Snippets"]
+	,	"body": [
+			"E.canvas()$0"
+		],
+		"description": "create [canvas] HTML element"
+	},
+	"E.col E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.col", "E.", "E.Snippets"]
+	,	"body": [
+			"E.col()$0"
+		],
+		"description": "create [col] HTML element"
+	},
+	"E.colgroup E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.colgroup", "E.", "E.Snippets"]
+	,	"body": [
+			"E.colgroup()$0"
+		],
+		"description": "create [colgroup] HTML element"
+	},
+	"E.datagrid E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.datagrid", "E.", "E.Snippets"]
+	,	"body": [
+			"E.datagrid()$0"
+		],
+		"description": "create [datagrid] HTML element"
+	},
+	"E.datalist E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.datalist", "E.", "E.Snippets"]
+	,	"body": [
+			"E.datalist()$0"
+		],
+		"description": "create [datalist] HTML element"
+	},
+	"E.dd E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.dd", "E.", "E.Snippets"]
+	,	"body": [
+			"E.dd()$0"
+		],
+		"description": "create [dd] HTML element"
+	},
+	"E.dialog E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.dialog", "E.", "E.Snippets"]
+	,	"body": [
+			"E.dialog()$0"
+		],
+		"description": "create [dialog] HTML element"
+	},
+	"E.div E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.div", "E.", "E.Snippets"]
+	,	"body": [
+			"E.div()$0"
+		],
+		"description": "create [div] HTML element"
+	},
+	"E.dl E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.dl", "E.", "E.Snippets"]
+	,	"body": [
+			"E.dl()$0"
+		],
+		"description": "create [dl] HTML element"
+	},
+	"E.dt E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.dt", "E.", "E.Snippets"]
+	,	"body": [
+			"E.dt()$0"
+		],
+		"description": "create [dt] HTML element"
+	},
+	"E.embed E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.embed", "E.", "E.Snippets"]
+	,	"body": [
+			"E.embed()$0"
+		],
+		"description": "create [embed] HTML element"
+	},
+	"E.fieldset E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.fieldset", "E.", "E.Snippets"]
+	,	"body": [
+			"E.fieldset()$0"
+		],
+		"description": "create [fieldset] HTML element"
+	},
+	"E.figcaption E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.figcaption", "E.", "E.Snippets"]
+	,	"body": [
+			"E.figcaption()$0"
+		],
+		"description": "create [figcaption] HTML element"
+	},
+	"E.figure E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.figure", "E.", "E.Snippets"]
+	,	"body": [
+			"E.figure()$0"
+		],
+		"description": "create [figure] HTML element"
+	},
+	"E.footer E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.footer", "E.", "E.Snippets"]
+	,	"body": [
+			"E.footer()$0"
+		],
+		"description": "create [footer] HTML element"
+	},
+	"E.form E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.form", "E.", "E.Snippets"]
+	,	"body": [
+			"E.form()$0"
+		],
+		"description": "create [form] HTML element"
+	},
+	"E.frame E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.frame", "E.", "E.Snippets"]
+	,	"body": [
+			"E.frame()$0"
+		],
+		"description": "create [frame] HTML element"
+	},
+	"E.frameset E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.frameset", "E.", "E.Snippets"]
+	,	"body": [
+			"E.frameset()$0"
+		],
+		"description": "create [frameset] HTML element"
+	},
+	"E.h1 E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.h1", "E.", "E.Snippets"]
+	,	"body": [
+			"E.h1()$0"
+		],
+		"description": "create [h1] HTML element"
+	},
+	"E.h2 E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.h2", "E.", "E.Snippets"]
+	,	"body": [
+			"E.h2()$0"
+		],
+		"description": "create [h2] HTML element"
+	},
+	"E.h3 E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.h3", "E.", "E.Snippets"]
+	,	"body": [
+			"E.h3()$0"
+		],
+		"description": "create [h3] HTML element"
+	},
+	"E.h4 E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.h4", "E.", "E.Snippets"]
+	,	"body": [
+			"E.h4()$0"
+		],
+		"description": "create [h4] HTML element"
+	},
+	"E.h5 E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.h5", "E.", "E.Snippets"]
+	,	"body": [
+			"E.h5()$0"
+		],
+		"description": "create [h5] HTML element"
+	},
+	"E.h6 E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.h6", "E.", "E.Snippets"]
+	,	"body": [
+			"E.h6()$0"
+		],
+		"description": "create [h6] HTML element"
+	},
+	"E.hgroup E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.hgroup", "E.", "E.Snippets"]
+	,	"body": [
+			"E.hgroup()$0"
+		],
+		"description": "create [hgroup] HTML element"
+	},
+	"E.hr E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.hr", "E.", "E.Snippets"]
+	,	"body": [
+			"E.hr()$0"
+		],
+		"description": "create [hr] HTML element"
+	},
+	"E.iframe E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.iframe", "E.", "E.Snippets"]
+	,	"body": [
+			"E.iframe()$0"
+		],
+		"description": "create [iframe] HTML element"
+	},
+	"E.img E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.img", "E.", "E.Snippets"]
+	,	"body": [
+			"E.img()$0"
+		],
+		"description": "create [img] HTML element"
+	},
+	"E.inputButton E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputButton", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputButton()$0"
+		],
+		"description": "create [inputButton] HTML element"
+	},
+	"E.inputCheckBox E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputCheckBox", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputCheckBox()$0"
+		],
+		"description": "create [inputCheckBox] HTML element"
+	},
+	"E.color E.inputColor E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.color", "E.inputColor", "E.", "E.Snippets"],
+		"body": [
+			"E.inputColor()$0"
+		],
+		"description": "create [color] HTML element"
+	},
+	"E.inputDate E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputDate", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputDate()$0"
+		],
+		"description": "create [inputDate] HTML element"
+	},
+	"E.inputDatetimeLocal E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputDatetimeLocal", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputDatetimeLocal()$0"
+		],
+		"description": "create [inputDatetimeLocal] HTML element"
+	},
+	"E.inputEmail E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputEmail", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputEmail()$0"
+		],
+		"description": "create [inputEmail] HTML element"
+	},
+	"E.inputFile E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputFile", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputFile()$0"
+		],
+		"description": "create [inputFile] HTML element"
+	},
+	"E.inputHidden E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputHidden", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputHidden()$0"
+		],
+		"description": "create [inputHidden] HTML element"
+	},
+	"E.inputImage E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputImage", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputImage()$0"
+		],
+		"description": "create [inputImage] HTML element"
+	},
+	"E.inputMeter E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputMeter", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputMeter()$0"
+		],
+		"description": "create [inputMeter] HTML element"
+	},
+	"E.inputMonth E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputMonth", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputMonth()$0"
+		],
+		"description": "create [inputMonth] HTML element"
+	},
+	"E.inputNumber E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputNumber", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputNumber()$0"
+		],
+		"description": "create [inputNumber] HTML element"
+	},
+	"E.inputPassword E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputPassword", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputPassword()$0"
+		],
+		"description": "create [inputPassword] HTML element"
+	},
+	"E.inputRadio E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputRadio", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputRadio()$0"
+		],
+		"description": "create [inputRadio] HTML element"
+	},
+	"E.inputRange E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputRange", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputRange()$0"
+		],
+		"description": "create [inputRange] HTML element"
+	},
+	"E.inputReset E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputReset", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputReset()$0"
+		],
+		"description": "create [inputReset] HTML element"
+	},
+	"E.inputSearch E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputSearch", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputSearch()$0"
+		],
+		"description": "create [inputSearch] HTML element"
+	},
+	"E.inputSubmit E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputSubmit", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputSubmit()$0"
+		],
+		"description": "create [inputSubmit] HTML element"
+	},
+	"E.inputTel E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputTel", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputTel()$0"
+		],
+		"description": "create [inputTel] HTML element"
+	},
+	"E.inputText E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputText", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputText()$0"
+		],
+		"description": "create [inputText] HTML element"
+	},
+	"E.inputTime E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputTime", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputTime()$0"
+		],
+		"description": "create [inputTime] HTML element"
+	},
+	"E.inputWeek E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputWeek", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputWeek()$0"
+		],
+		"description": "create [inputWeek] HTML element"
+	},
+	"E.inputUrl E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputUrl", "E.", "E.Snippets"]
+	,	"body": [
+			"E.inputUrl()$0"
+		],
+		"description": "create [inputUrl] HTML element"
+	},
+	"E.keygen E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.keygen", "E.", "E.Snippets"]
+	,	"body": [
+			"E.keygen()$0"
+		],
+		"description": "create [keygen] HTML element"
+	},
+	"E.label E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.label", "E.", "E.Snippets"]
+	,	"body": [
+			"E.label()$0"
+		],
+		"description": "create [label] HTML element"
+	},
+	"E.legend E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.legend", "E.", "E.Snippets"]
+	,	"body": [
+			"E.legend()$0"
+		],
+		"description": "create [legend] HTML element"
+	},
+	"E.li E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.li", "E.", "E.Snippets"]
+	,	"body": [
+			"E.li()$0"
+		],
+		"description": "create [li] HTML element"
+	},
+	"E.map E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.map", "E.", "E.Snippets"]
+	,	"body": [
+			"E.map()$0"
+		],
+		"description": "create [map] HTML element"
+	},
+	"E.nav E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.nav", "E.", "E.Snippets"]
+	,	"body": [
+			"E.nav()$0"
+		],
+		"description": "create [nav] HTML element"
+	},
+	"E.object E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.object", "E.", "E.Snippets"]
+	,	"body": [
+			"E.object()$0"
+		],
+		"description": "create [object] HTML element"
+	},
+	"E.ol E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.ol", "E.", "E.Snippets"]
+	,	"body": [
+			"E.ol()$0"
+		],
+		"description": "create [ol] HTML element"
+	},
+	"E.optgroup E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.optgroup", "E.", "E.Snippets"]
+	,	"body": [
+			"E.optgroup()$0"
+		],
+		"description": "create [optgroup] HTML element"
+	},
+	"E.option E.inputOption E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.option","E.inputOption", "E.", "E.Snippets"],
+		"body": [
+			"E.inputOption()$0"
+		],
+		"description": "create [option] HTML element"
+	},
+	"E.p E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.p", "E.", "E.Snippets"]
+	,	"body": [
+			"E.p()$0"
+		],
+		"description": "create [p] HTML element"
+	},
+	"E.param E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.param", "E.", "E.Snippets"]
+	,	"body": [
+			"E.param()$0"
+		],
+		"description": "create [param] HTML element"
+	},
+	"E.progress E.inputProgress E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.progress", "E.inputProgress", "E.", "E.Snippets"],
+		"body": [
+			"E.inputProgress()$0"
+		],
+		"description": "create [progress] HTML element"
+	},
+	"E.q E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.q", "E.", "E.Snippets"]
+	,	"body": [
+			"E.q()$0"
+		],
+		"description": "create [q] HTML element"
+	},
+	"E.script E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.script", "E.", "E.Snippets"]
+	,	"body": [
+			"E.script()$0"
+		],
+		"description": "create [script] HTML element"
+	},
+	"E.section E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.section", "E.", "E.Snippets"]
+	,	"body": [
+			"E.section()$0"
+		],
+		"description": "create [section] HTML element"
+	},
+	"E.inputSelect E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.inputSelect", "E.", "E.Snippets"],
+		"body": [
+			"E.inputSelect()$0"
+		],
+		"description": "create [select] HTML element"
+	},
+	"E.span E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.span", "E.", "E.Snippets"]
+	,	"body": [
+			"E.span()$0"
+		],
+		"description": "create [span] HTML element"
+	},
+	"E.sub E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.sub", "E.", "E.Snippets"]
+	,	"body": [
+			"E.sub()$0"
+		],
+		"description": "create [sub] HTML element"
+	},
+	"E.sup E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.sup", "E.", "E.Snippets"]
+	,	"body": [
+			"E.sup()$0"
+		],
+		"description": "create [sup] HTML element"
+	},
+	"E.table E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.table", "E.", "E.Snippets"]
+	,	"body": [
+			"E.table()$0"
+		],
+		"description": "create [table] HTML element"
+	},
+	"E.tbody E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.tbody", "E.", "E.Snippets"]
+	,	"body": [
+			"E.tbody()$0"
+		],
+		"description": "create [tbody] HTML element"
+	},
+	"E.td E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.td", "E.", "E.Snippets"]
+	,	"body": [
+			"E.td()$0"
+		],
+		"description": "create [td] HTML element"
+	},
+	"E.textArea E.inputTextarea E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.textarea", "E.inputTextarea", "E.", "E.Snippets"],
+		"body": [
+			"E.inputTextarea()$0"
+		],
+		"description": "create [textarea] HTML element"
+	},
+	"E.tfoot E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.tfoot", "E.", "E.Snippets"]
+	,	"body": [
+			"E.tfoot()$0"
+		],
+		"description": "create [tfoot] HTML element"
+	},
+	"E.th E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.th", "E.", "E.Snippets"]
+	,	"body": [
+			"E.th()$0"
+		],
+		"description": "create [th] HTML element"
+	},
+	"E.thead E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.thead", "E.", "E.Snippets"]
+	,	"body": [
+			"E.thead()$0"
+		],
+		"description": "create [thead] HTML element"
+	},
+	"E.tr E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.tr", "E.", "E.Snippets"]
+	,	"body": [
+			"E.tr()$0"
+		],
+		"description": "create [tr] HTML element"
+	},
+	"E.track E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.track", "E.", "E.Snippets"]
+	,	"body": [
+			"E.track()$0"
+		],
+		"description": "create [track] HTML element"
+	},
+	"E.u E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.u", "E.", "E.Snippets"]
+	,	"body": [
+			"E.u()$0"
+		],
+		"description": "create [u] HTML element"
+	},
+	"E.ul E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.ul", "E.", "E.Snippets"]
+	,	"body": [
+			"E.ul()$0"
+		],
+		"description": "create [ul] HTML element"
+	},
+	"E.video E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.video", "E.", "E.Snippets"]
+	,	"body": [
+			"E.video()$0"
+		],
+		"description": "create [video] HTML element"
+	},
+	"E.wbr E.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["E.wbr", "E.", "E.Snippets"]
+	,	"body": [
+			"E.wbr()$0"
+		],
+		"description": "create [wbr] HTML element"
+	},
+	"A.a A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.a", "A.", "A.Snippets"],
+		"body": [
+			"A.a('${1:varName}')$0"
+		],
+		"description": "create [a] HTML element"
+	},
+	"A.area A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.area", "A.", "A.Snippets"],
+		"body": [
+			"A.area('${1:varName}')$0"
+		],
+		"description": "create [area] HTML element"
+	},
+	"A.article A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.article", "A.", "A.Snippets"],
+		"body": [
+			"A.article('${1:varName}')$0"
+		],
+		"description": "create [article] HTML element"
+	},
+	"A.aside A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.aside", "A.", "A.Snippets"],
+		"body": [
+			"A.aside('${1:varName}')$0"
+		],
+		"description": "create [aside] HTML element"
+	},
+	"A.audio A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.audio", "A.", "A.Snippets"],
+		"body": [
+			"A.audio('${1:varName}')$0"
+		],
+		"description": "create [audio] HTML element"
+	},
+	"A.br A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.br", "A.", "A.Snippets"],
+		"body": [
+			"A.br('${1:varName}')$0"
+		],
+		"description": "create [br] HTML element"
+	},
+	"A.canvas A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.canvas", "A.", "A.Snippets"],
+		"body": [
+			"A.canvas('canvas${1:varName}')$0"
+		],
+		"description": "create [canvas] HTML element"
+	},
+	"A.col A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.col", "A.", "A.Snippets"],
+		"body": [
+			"A.col('${1:varName}')$0"
+		],
+		"description": "create [col] HTML element"
+	},
+	"A.colgroup A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.colgroup", "A.", "A.Snippets"],
+		"body": [
+			"A.colgroup('${1:varName}')$0"
+		],
+		"description": "create [colgroup] HTML element"
+	},
+	"A.datagrid A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.datagrid", "A.", "A.Snippets"],
+		"body": [
+			"A.datagrid('${1:varName}')$0"
+		],
+		"description": "create [datagrid] HTML element"
+	},
+	"A.datalist A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.datalist", "A.", "A.Snippets"],
+		"body": [
+			"A.datalist('${1:varName}')$0"
+		],
+		"description": "create [datalist] HTML element"
+	},
+	"A.dd A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.dd", "A.", "A.Snippets"],
+		"body": [
+			"A.dd('${1:varName}')$0"
+		],
+		"description": "create [dd] HTML element"
+	},
+	"A.dialog A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.dialog", "A.", "A.Snippets"],
+		"body": [
+			"A.dialog('dialog${1:varName}')$0"
+		],
+		"description": "create [dialog] HTML element"
+	},
+	"A.div A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.div", "A.", "A.Snippets"],
+		"body": [
+			"A.div('${1:varName}')$0"
+		],
+		"description": "create [div] HTML element"
+	},
+	"A.dl A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.dl", "A.", "A.Snippets"],
+		"body": [
+			"A.dl('${1:varName}')$0"
+		],
+		"description": "create [dl] HTML element"
+	},
+	"A.dt A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.dt", "A.", "A.Snippets"],
+		"body": [
+			"A.dt('${1:varName}')$0"
+		],
+		"description": "create [dt] HTML element"
+	},
+	"A.embed A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.embed", "A.", "A.Snippets"],
+		"body": [
+			"A.embed('${1:varName}')$0"
+		],
+		"description": "create [embed] HTML element"
+	},
+	"A.fieldset A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.fieldset", "A.", "A.Snippets"],
+		"body": [
+			"A.fieldset('${1:varName}')$0"
+		],
+		"description": "create [fieldset] HTML element"
+	},
+	"A.figcaption A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.figcaption", "A.", "A.Snippets"],
+		"body": [
+			"A.figcaption('${1:varName}')$0"
+		],
+		"description": "create [figcaption] HTML element"
+	},
+	"A.figure A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.figure", "A.", "A.Snippets"],
+		"body": [
+			"A.figure('${1:varName}')$0"
+		],
+		"description": "create [figure] HTML element"
+	},
+	"A.footer A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.footer", "A.", "A.Snippets"],
+		"body": [
+			"A.footer('${1:varName}')$0"
+		],
+		"description": "create [footer] HTML element"
+	},
+	"A.form A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.form", "A.", "A.Snippets"],
+		"body": [
+			"A.form('form${1:varName}')$0"
+		],
+		"description": "create [form] HTML element"
+	},
+	"A.frame A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.frame", "A.", "A.Snippets"],
+		"body": [
+			"A.frame('frame${1:varName}')$0"
+		],
+		"description": "create [frame] HTML element"
+	},
+	"A.frameset A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.frameset", "A.", "A.Snippets"],
+		"body": [
+			"A.frameset('${1:varName}')$0"
+		],
+		"description": "create [frameset] HTML element"
+	},
+	"A.h1 A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.h1", "A.", "A.Snippets"],
+		"body": [
+			"A.h1('${1:varName}')$0"
+		],
+		"description": "create [h1] HTML element"
+	},
+	"A.h2 A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.h2", "A.", "A.Snippets"],
+		"body": [
+			"A.h2('${1:varName}')$0"
+		],
+		"description": "create [h2] HTML element"
+	},
+	"A.h3 A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.h3", "A.", "A.Snippets"],
+		"body": [
+			"A.h3('${1:varName}')$0"
+		],
+		"description": "create [h3] HTML element"
+	},
+	"A.h4 A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.h4", "A.", "A.Snippets"],
+		"body": [
+			"A.h4('${1:varName}')$0"
+		],
+		"description": "create [h4] HTML element"
+	},
+	"A.h5 A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.h5", "A.", "A.Snippets"],
+		"body": [
+			"A.h5('${1:varName}')$0"
+		],
+		"description": "create [h5] HTML element"
+	},
+	"A.h6 A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.h6", "A.", "A.Snippets"],
+		"body": [
+			"A.h6('${1:varName}')$0"
+		],
+		"description": "create [h6] HTML element"
+	},
+	"A.hgroup A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.hgroup", "A.", "A.Snippets"],
+		"body": [
+			"A.hgroup('group${1:varName}')$0"
+		],
+		"description": "create [hgroup] HTML element"
+	},
+	"A.hr A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.hr", "A.", "A.Snippets"],
+		"body": [
+			"A.hr('${1:varName}')$0"
+		],
+		"description": "create [hr] HTML element"
+	},
+	"A.iframe A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.iframe", "A.", "A.Snippets"],
+		"body": [
+			"A.iframe('iframe${1:varName}')$0"
+		],
+		"description": "create [iframe] HTML element"
+	},
+	"A.img A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.img", "A.", "A.Snippets"],
+		"body": [
+			"A.img('img${1:varName}')$0"
+		],
+		"description": "create [img] HTML element"
+	},
+	"A.inputButton A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputButton", "A.", "A.Snippets"],
+		"body": [
+			"A.inputButton('btn${1:varName}')$0"
+		],
+		"description": "create [inputButton] HTML element"
+	},
+	"A.inputCheckBox A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputCheckBox", "A.", "A.Snippets"],
+		"body": [
+			"A.inputCheckBox('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputCheckBox] HTML element"
+	},
+	"A.color, A.inputColor A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.color", "A.inputColor", "A.", "A.Snippets"],
+		"body": [
+			"A.inputColor('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [color] HTML element"
+	},
+	"A.inputDate A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputDate", "A.", "A.Snippets"],
+		"body": [
+			"A.inputDate('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputDate] HTML element"
+	},
+	"A.inputDatetimeLocal A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputDatetimeLocal", "A.", "A.Snippets"],
+		"body": [
+			"A.inputDatetimeLocal('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputDatetimeLocal] HTML element"
+	},
+	"A.inputEmail A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputEmail", "A.", "A.Snippets"],
+		"body": [
+			"A.inputEmail('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputEmail] HTML element"
+	},
+	"A.inputFile A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputFile", "A.", "A.Snippets"],
+		"body": [
+			"A.inputFile('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputFile] HTML element"
+	},
+	"A.inputHidden A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputHidden", "A.", "A.Snippets"],
+		"body": [
+			"A.inputHidden('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputHidden] HTML element"
+	},
+	"A.inputImage A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputImage", "A.", "A.Snippets"],
+		"body": [
+			"A.inputImage('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputImage] HTML element"
+	},
+	"A.inputMonth A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputMonth", "A.", "A.Snippets"],
+		"body": [
+			"A.inputMonth('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputMonth] HTML element"
+	},
+	"A.inputNumber A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputNumber", "A.", "A.Snippets"],
+		"body": [
+			"A.inputNumber('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputNumber] HTML element"
+	},
+	"A.inputPassword A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputPassword", "A.", "A.Snippets"],
+		"body": [
+			"A.inputPassword('input${1:Password}')$0"
+		],
+		"description": "create [inputPassword] HTML element"
+	},
+	"A.inputRadio A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputRadio", "A.", "A.Snippets"],
+		"body": [
+			"A.inputRadio('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputRadio] HTML element"
+	},
+	"A.inputRange A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputRange", "A.", "A.Snippets"],
+		"body": [
+			"A.inputRange('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputRange] HTML element"
+	},
+	"A.inputReset A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputReset", "A.", "A.Snippets"],
+		"body": [
+			"A.inputReset('btn${1:varName}')$0"
+		],
+		"description": "create [inputReset] HTML element"
+	},
+	"A.inputSearch A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputSearch", "A.", "A.Snippets"],
+		"body": [
+			"A.inputSearch('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputSearch] HTML element"
+	},
+	"A.inputSelect A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputSelect", "A.", "A.Snippets"],
+		"body": [
+			"A.inputSelect('input${1:varName}')$0"
+		],
+		"description": "create [select] HTML element"
+	},
+	"A.inputSubmit A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputSubmit", "A.", "A.Snippets"],
+		"body": [
+			"A.inputSubmit('btn${1:varName}')$0"
+		],
+		"description": "create [inputSubmit] HTML element"
+	},
+	"A.inputTel A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputTel", "A.", "A.Snippets"],
+		"body": [
+			"A.inputTel('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputTel] HTML element"
+	},
+	"A.inputText A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputText", "A.", "A.Snippets"],
+		"body": [
+			"A.inputText('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputText] HTML element"
+	},
+	"A.inputTime A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputTime", "A.", "A.Snippets"],
+		"body": [
+			"A.inputTime('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputTime] HTML element"
+	},
+	"A.inputWeek A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputWeek", "A.", "A.Snippets"],
+		"body": [
+			"A.inputWeek('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputWeek] HTML element"
+	},
+	"A.inputUrl A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputUrl", "A.", "A.Snippets"],
+		"body": [
+			"A.inputUrl('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [inputUrl] HTML element"
+	},
+	"A.keygen A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.keygen", "A.", "A.Snippets"],
+		"body": [
+			"A.keygen('${1:varName}')$0"
+		],
+		"description": "create [keygen] HTML element"
+	},
+	"A.label A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.label", "A.", "A.Snippets"],
+		"body": [
+			"A.label('lbl${1:varName}')$0"
+		],
+		"description": "create [label] HTML element"
+	},
+	"A.legend A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.legend", "A.", "A.Snippets"],
+		"body": [
+			"A.legend('${1:varName}')$0"
+		],
+		"description": "create [legend] HTML element"
+	},
+	"A.li A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.li", "A.", "A.Snippets"],
+		"body": [
+			"A.li('${1:varName}')$0"
+		],
+		"description": "create [li] HTML element"
+	},
+	"A.map A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.map", "A.", "A.Snippets"],
+		"body": [
+			"A.map('${1:varName}')$0"
+		],
+		"description": "create [map] HTML element"
+	},
+	"A.inputMeter A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.inputMeter", "A.", "A.Snippets"],
+		"body": [
+			"A.inputMeter('input${1:Name}')$0"
+		],
+		"description": "create [meter] HTML element"
+	},
+	"A.nav A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.nav", "A.", "A.Snippets"],
+		"body": [
+			"A.nav('${1:varName}')$0"
+		],
+		"description": "create [nav] HTML element"
+	},
+	"A.object A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.object", "A.", "A.Snippets"],
+		"body": [
+			"A.object('${1:varName}')$0"
+		],
+		"description": "create [object] HTML element"
+	},
+	"A.ol A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.ol", "A.", "A.Snippets"],
+		"body": [
+			"A.ol('${1:varName}')$0"
+		],
+		"description": "create [ol] HTML element"
+	},
+	"A.optgroup A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.optgroup", "A.", "A.Snippets"],
+		"body": [
+			"A.optgroup('${1:varName}')$0"
+		],
+		"description": "create [optgroup] HTML element"
+	},
+	"A.option A.inputOption A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.option", "A.inputOption", "A.", "A.Snippets"],
+		"body": [
+			"A.inputOption('opt${1:varName}')$0"
+		],
+		"description": "create [option] HTML element"
+	},
+	"A.p A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.p", "A.", "A.Snippets"],
+		"body": [
+			"A.p('${1:varName}')$0"
+		],
+		"description": "create [p] HTML element"
+	},
+	"A.param A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.param", "A.", "A.Snippets"],
+		"body": [
+			"A.param('${1:varName}')$0"
+		],
+		"description": "create [param] HTML element"
+	},
+	"A.progress A.inputProgress A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.progress", "A.inputProgress", "A.", "A.Snippets"],
+		"body": [
+			"A.inputProgress('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [progress] HTML element"
+	},
+	"A.q A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.q", "A.", "A.Snippets"],
+		"body": [
+			"A.q('${1:varName}')$0"
+		],
+		"description": "create [q] HTML element"
+	},
+	"A.script A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.script", "A.", "A.Snippets"],
+		"body": [
+			"A.script('${1:varName}')$0"
+		],
+		"description": "create [script] HTML element"
+	},
+	"A.section A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.section", "A.", "A.Snippets"],
+		"body": [
+			"A.section('${1:varName}')$0"
+		],
+		"description": "create [section] HTML element"
+	},
+	"A.span A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.span", "A.", "A.Snippets"],
+		"body": [
+			"A.span('span${1:varName}')$0"
+		],
+		"description": "create [span] HTML element"
+	},
+	"A.sub A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.sub", "A.", "A.Snippets"],
+		"body": [
+			"A.sub('${1:varName}')$0"
+		],
+		"description": "create [sub] HTML element"
+	},
+	"A.sup A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.sup", "A.", "A.Snippets"],
+		"body": [
+			"A.sup('${1:varName}')$0"
+		],
+		"description": "create [sup] HTML element"
+	},
+	"A.table A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.table", "A.", "A.Snippets"],
+		"body": [
+			"A.table('${1:varName}')$0"
+		],
+		"description": "create [table] HTML element"
+	},
+	"A.tbody A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.tbody", "A.", "A.Snippets"],
+		"body": [
+			"A.tbody('${1:varName}')$0"
+		],
+		"description": "create [tbody] HTML element"
+	},
+	"A.td A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.td", "A.", "A.Snippets"],
+		"body": [
+			"A.td('${1:varName}')$0"
+		],
+		"description": "create [td] HTML element"
+	},
+	"A.textarea A.inputTextarea A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.textarea", "A.inputTextarea", "A.", "A.Snippets"],
+		"body": [
+			"A.inputTextarea('${1|input,inputUpdate|}${2:varName}')$0"
+		],
+		"description": "create [textarea] HTML element"
+	},
+	"A.tfoot A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.tfoot", "A.", "A.Snippets"],
+		"body": [
+			"A.tfoot('${1:varName}')$0"
+		],
+		"description": "create [tfoot] HTML element"
+	},
+	"A.th A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.th", "A.", "A.Snippets"],
+		"body": [
+			"A.th('${1:varName}')$0"
+		],
+		"description": "create [th] HTML element"
+	},
+	"A.thead A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.thead", "A.", "A.Snippets"],
+		"body": [
+			"A.thead('${1:varName}')$0"
+		],
+		"description": "create [thead] HTML element"
+	},
+	"A.tr A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.tr", "A.", "A.Snippets"],
+		"body": [
+			"A.tr('${1:varName}')$0"
+		],
+		"description": "create [tr] HTML element"
+	},
+	"A.track A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.track", "A.", "A.Snippets"],
+		"body": [
+			"A.track('${1:varName}')$0"
+		],
+		"description": "create [track] HTML element"
+	},
+	"A.u A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.u", "A.", "A.Snippets"],
+		"body": [
+			"A.u('${1:varName}')$0"
+		],
+		"description": "create [u] HTML element"
+	},
+	"A.ul A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.ul", "A.", "A.Snippets"],
+		"body": [
+			"A.ul('${1:varName}')$0"
+		],
+		"description": "create [ul] HTML element"
+	},
+	"A.video A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.video", "A.", "A.Snippets"],
+		"body": [
+			"A.video('${1:varName}')$0"
+		],
+		"description": "create [video] HTML element"
+	},
+	"A.wbr A.Snippets Tag": {
+		"scope": "javascript,typescript",
+		"prefix": ["A.wbr", "A.", "A.Snippets"],
+		"body": [
+			"A.wbr('${1:varName}')$0"
+		],
+		"description": "create [wbr] HTML element"
+	}
+	
+}
