@@ -7,7 +7,8 @@ class ActionSet{
     static unlog;
 
     constructor(location){
-        this.viewInitialize = new ViewInitialize()
+        this.viewInitialize = new ViewInitialize()._init()
+        document.body.a(this.viewInitialize)
         this.actionsMenu = new ActionsMenu(this.viewInitialize)
         this.actionsSearch = new ActionsSearch(this.actionsMenu)
         this.actionsNavigation = new ActionsNavigation(location)

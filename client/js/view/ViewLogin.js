@@ -15,6 +15,9 @@
             ),
             A.label('lblRecoverAccess').t(LANG.recover_access)
         ])
+
+        this.$inputUsername.value = 'andrew_santos'
+        this.$inputPassword.value = '#0xCUSTOM'
     }
 
     _limits(){
