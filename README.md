@@ -1,5 +1,6 @@
 # kalida framework
 #EN_US
+-
 The front end is in the client folder.
 The Java server is in the server folder.
 
@@ -10,6 +11,7 @@ VSCode was used plus the LiveServer plugin on port 5500, in accordance with the 
 The test users were created in the ConfigTest.java file and have a password of #0xCUSTOM, just navigate to the server\src\main\java\com\kalida\config folder.
 
 #PT_BR
+-
 O front end está na pasta client.
 O servidor Java está na pasta server.
 
