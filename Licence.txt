@@ -1,9 +1,0 @@
-Os arquivos TAG e TAG_development são na prática a mesma biblioteca e possuem uma licença própria, à parte, conforme pode ser visto em https://github.com/addller/kalida_script.
-
-Para os demais arquivos da aplicação é válida a presente licença nos termos que se seguem:
-
-1) a presente licença é gratuita e não oferecemos nenhum tipo de garantia, nem somos responsáveis por qualquer problema advindo da utilização dos códigos em questão;
-
-2) os usuários podem modificar os arquivos sem nenhuma obrigação acessória;
-
-4) o usuário compreende que a presente licença não abrange os arquivos TAG e TAG_development pois eles têm sua própria licença.
