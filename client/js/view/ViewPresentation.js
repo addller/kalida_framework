@@ -9,7 +9,8 @@ class ViewPresentation extends JView{
     }
 
     _selectPresentation(){
-        this.$iframePresentation.src = new Enderessable(API_VIEW_KALIDA.toUrlBase(`/presentation_${LANG.cod_lang}.html`)).urlDest;
+        let enderessable =  new Enderessable(API_VIEW_KALIDA.toUrlBase(`/presentation_${LANG.cod_lang}.html`));
+        this.$iframePresentation.src = enderessable.urlDest
     }
 
 }
