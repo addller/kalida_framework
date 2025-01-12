@@ -147,10 +147,6 @@
 			"\t_init(){",
 			"\t\t$0",
 			"\t}\n",
-			"\t_events(){",
-			"\t\t//only for simple actions",
-			"\t\t//events should be handled preferently by a Controller or an Action class",
-			"\t}\n",
 			"\t_limits(){\n\t\t\n\t}\n",
 			"}"
 		],
@@ -1676,6 +1672,17 @@
 		"prefix": ["A.wbr", "A.", "A.Snippets"],
 		"body": [
 			"A.wbr('${1:varName}')$0"
+		],
+		"description": "create [wbr] HTML element"
+	},
+	"language snippet support": {
+		"scope": "javascript,typescript",
+		"prefix": ["language, idiom"],
+		"body": [
+			"{",
+			"\t${1:PT_BR}:'$2',",
+			"\t${3:EN_US}:'$4'",
+			"},$0"
 		],
 		"description": "create [wbr] HTML element"
 	}
