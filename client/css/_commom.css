@@ -3,5 +3,8 @@
 @import url("ViewNavigation.css");
 @import url('ViewLogin.css');
 @import url("toast.css");
+@import url("Dialog.css");
+@import url("Waiter.css");
+@import url("buttons_and_loaders.css");
 @import url("ViewMenuItemUser.css");
 @import url("ViewRowNotification.css");

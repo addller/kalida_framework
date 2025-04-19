@@ -30,15 +30,16 @@ class ControllerEditClient extends JMount{
         viewEditUser.$formEditUser.onsubmit = e => {
             consume(e)
             let source = viewEditUser.viewValues_(true),
-                enderessable = API_KALIDA.toUsers('profile');
+                enderessable = API_KALIDA.toUsers("/other_profile");
             
             if(viewEditUser.isUpdated_()){
                 toast(LANG.nothing_changed)
                 return
             }
+            
             JRequest.prepare(enderessable, source)
                 .inResponse(
-                    _ => {
+                    (_, response) => {
                         viewEditUser.updateView_(source)
 
                         let title = LANG.information,

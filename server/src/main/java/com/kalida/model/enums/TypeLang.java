@@ -9,8 +9,8 @@ import lombok.Getter;
 @Getter
 public enum TypeLang {
 
-    PT_BR(1, "Portugues-BR", "pt-BR"),
-    EN_US(2, "English-US", "en-US");
+    PT_BR(1, "Portugues-BR", "PT_BR"),
+    EN_US(2, "English-US", "EN_US");
     
     private short cod;
     private String description;

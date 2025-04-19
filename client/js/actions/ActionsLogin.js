@@ -55,8 +55,9 @@ class ActionsLogin extends JMount{
 
         $formLogin.onsubmit = e => {
             consume(e)
+
             let source = viewLogin.viewValues_(),
-                waiter = new Waiter(LANG.processing_request).hideDivAnimation();
+                waiter = new Waiter(LANG.processing_request);
             
             JRequest.prepare(API_KALIDA.toAuth('signin'), source)
                 .inSequence(

@@ -10,8 +10,8 @@ class ViewMenu extends JView{
             A.span('iconSearch').c('sprite'),   
             A.inputSearch('inputSearch').p(LANG.search),
             A.inputSelect("inputLang").a(
-                A.inputOption('optPortuguesBr').otv("Português - BR", 'pt-BR'),
-                A.inputOption('optEnglishUS').otv("English - US", 'en-US')
+                A.inputOption('optPortuguesBr').otv("Português - BR", 'PT_BR'),
+                A.inputOption('optEnglishUS').otv("English - US", 'EN_US')
             ),
             A.jView(new ViewMenuItemUser(), this)
         )

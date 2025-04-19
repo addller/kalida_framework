@@ -86,8 +86,8 @@ public class ControllerUser extends Controllable{
     } 
     
     //remove this end point
-    @PutMapping("/profile")
-    public ResponseEntity<Void> editProfile2(@RequestBody UserProfileDTO userDTO){
+    @PutMapping("/other_profile")
+    public ResponseEntity<Void> editOtherProfile(@RequestBody UserProfileDTO userDTO){
         saveUser(userDTO);
         return noContent();
     } 

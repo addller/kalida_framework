@@ -48,7 +48,7 @@ class ControllerEditProfile extends JMount{
 
                         let title = LANG.information,
                             message = LANG.user_saved;
-
+                        debugger
                         new Dialog(message, title, () => {
                             ActionsLogin.saveLogin(response, null, false)
                         }).hideBtnNegate(LANG.close).show();

@@ -1,158 +1,259 @@
 class Language{
 
     static setCodLang(codLang, redirectTo){
-        codLang && localStorage.setItem('cod_lang', codLang)
+        localStorage.setItem('cod_lang', codLang)
         redirectTo && redirect(redirectTo)
     }
 
     static defineLang(){
-        let cod_lang = localStorage.getItem('cod_lang') || "pt-BR";
+        let codLang =  localStorage.getItem('cod_lang') || "PT_BR",
+            registredLangs = ['PT_BR', 'EN_US'];
 
-        keysOf(LANG).forEach(key => {
-            [LANG_PT_BR, LANG_EN_US]
-                .forEach(lang => {
-                    if(!(key in lang)) console.log(`Key[${key}] not found for lang ${lang.cod_lang}`)
-                })
+        keysOf(LANG).forEach(key =>{ 
+            registredLangs.forEach(lang => {
+                if(!LANG[key][lang])
+                    throw `BASE_LANG incomplet for key ${key}, lang ${lang}`
+            })
+            LANG[key] = LANG[key][codLang]
         })
-        
-        LANG = {
-            "pt-BR":LANG_PT_BR,
-            "en-US":LANG_EN_US
-        }[cod_lang]
-
     }
-
-
 }
 
-var LANG = {
-    cod_lang: 'pt-BR',
-    yes: "Sim",
-    not: "Não",
-    processing_request:"Processando a requisição",
-    user_name:"Nome de usuário",
-    password:"Senha",
-    sign_in:"Entrar",
-    sign_up:"Registrar",
-    sign_out:"Sair",
-    email:"Email",
-    change_email:'Mudar email',
-    changePassword:"Mudar senha",
-    new_password:"Nova senha",
-    password_updated:"Senha atualizada",
-    current_password:"Senha Atual",
-    invalid_current_password:"Senha atual inválida",
-    lang:"Idioma",
-    cancel:"Cancelar",
-    back:'Voltar',
-    add:"Adicionar",
-    update:"Atualizar",
-    sign_up:"Registrar",
-    edit_profile:"Editar perfil",
-    recover_access:"Recuperar Acesso",
-    search:"Pesquisar",
-    edit_profile:"Editar perfil",
-    home:"Início",
-    information:"Info",
-    registration_performed:"Registro realizado",
-    close:"Fechar",
-    search_results:"Resultados da pesquisa",
-    user_or_password_invalid:"Nome de usuário ou senha inválido",
-    access_denied:"Acesso negado",
-    summary:"Sumário",
-    users:"Usuários",
-    login:"Login",
-    technologies:"Tecnologias",
-    choose_all:"Escolher todos",
-    name: 'Nome',
-    username: "Nome de usuário",
-    nickName: "Apelido",
-    edit: "Editar",
-    delete: "Excluir",
-    type:"Tipo",
-    description:"Descrição",
-    confirm_delete_user:"Confirma a exclusão do usuario?",
-    start_year:"Ano de início",
-    user:"Usuário",
-    technology:"Tecnologia",
-    experiences:"Experiências",
-    edit_user:"Editar usuário",
-    user_saved:"Usuário salvo",
-    nothing_changed:"Não há alterações a serem salvas",
-    waiting: "Aguardando",
-    include_experience:"Incluir experiência",
-    select_technology:"Selecionar tecnologia",
-    my_experiences:"Minhas experiências",
-    have_not_experiences:"Você não possui experiência",
-    choose_technology:"Escolha uma tecnologia",
-    clients:"Clientes",
-    edit_client:"Editar cliente"
-};
-
-const LANG_PT_BR = LANG;
-
-var LANG_EN_US = {
-    cod_lang: 'en-US',
-    yes: "Yes",
-    not: "Not",
-    processing_request:'Processing the request',
-    user_name:"User name",
-    password:"Password",
-    sign_in:"Sign in",
-    sign_up:"Sign up",
-    edit_profile:'Edit profile',
-    sign_out:"Sign out",
-    email:"Email",
-    change_email:"Change email",
-    changePassword:"Change password",
-    new_password:"New password",
-    password_updated:"Password updated",
-    current_password:"Current password",
-    invalid_current_password:"Invalid current password",
-    lang:"Language",
-    cancel:"Cancel",
-    back:'Back',
-    add:"Add",
-    update:"Update",
-    sign_up:"Sign up",
-    recover_access:"Recover Access",
-    search:"Search",
-    edit_profile:"Edit profile",
-    home:"Home",
-    information:"Info",
-    registration_performed:'Registration performed',
-    close:"Close",
-    search_results:"Search Results",
-    user_or_password_invalid:"User name or password invalid",
-    access_denied:"Access denied",
-    summary:"Summary",
-    users:"Users",
-    login:"Login",
-    technologies:"Tecnologies",
-    choose_all:"Escolher todos",
-    name: "Name",
-    username: "User name",
-    nickName: "Nick name",
-    edit: "Edit",
-    delete: "Delete",
-    type:"Type",
-    description:"Description",
-    confirm_delete_user:"Confirm delete user?",
-    start_year:"Start year",
-    user:"User",
-    technology:"Technology",
-    experiences:"Experiences",
-    edit_user:"Edit user",
-    user_saved:"User saved",
-    nothing_changed:"Nothing changed",
-    waiting:"Waiting",
-    include_experience:"Include experience",
-    select_technology:"Select technology",
-    my_experiences:"My experiences",
-    have_not_experiences:"You have not experience",
-    choose_technology:"Choose a technology",
-    clients:"Clients",
-    edit_client:"Edit client"
-};
-
-
+const LANG = {
+    cod_lang:{
+        PT_BR:'PT_BR',
+        EN_US:'EN_US'
+    },
+    yes:{
+        PT_BR:'Sim',
+        EN_US:'Yes'
+    },
+    not:{
+        PT_BR:'Não',
+        EN_US:'Not'
+    },
+    processing_request:{
+        PT_BR:'Processando a requisição',
+        EN_US:'Processing the request'
+    },
+    user_name:{
+        PT_BR:'Nome de usuário',
+        EN_US:'User name'
+    },
+    password:{
+        PT_BR:'Senha',
+        EN_US:'Password'
+    },
+    sign_in:{
+        PT_BR:'Entrar',
+        EN_US:'Sign in'
+    },
+    sign_out:{
+        PT_BR:'Sair',
+        EN_US:'Sign out'
+    },
+    email:{
+        PT_BR:'Email',
+        EN_US:'Email'
+    },
+    change_email:{
+        PT_BR:'Mudar email',
+        EN_US:'Change email'
+    },
+    changePassword:{
+        PT_BR:'Mudar senha',
+        EN_US:'Change password'
+    },
+    new_password:{
+        PT_BR:'Nova senha',
+        EN_US:'New password'
+    },
+    password_updated:{
+        PT_BR:'Senha atualizada',
+        EN_US:'Password updated'
+    },
+    current_password:{
+        PT_BR:'Senha atual',
+        EN_US:'Current password'
+    },
+    invalid_current_password:{
+        PT_BR:'Senha atual inválida',
+        EN_US:'Invalid current password'
+    },
+    lang:{
+        PT_BR:'Idioma',
+        EN_US:'Language'
+    },
+    cancel:{
+        PT_BR:'Cancelar',
+        EN_US:'Cancel'
+    },
+    back:{
+        PT_BR:'Voltar',
+        EN_US:'Back'
+    },
+    add:{
+        PT_BR:'Adicionar',
+        EN_US:'Add'
+    },
+    update:{
+        PT_BR:'Atualizar',
+        EN_US:'Update'
+    },
+    sign_up:{
+        PT_BR:'Registrar',
+        EN_US:'Sign up'
+    },
+    edit_profile:{
+        PT_BR:'Editar perfil',
+        EN_US:'Edit profile'
+    },
+    recover_access:{
+        PT_BR:'Recuperar Acesso',
+        EN_US:'Recover Access'
+    },
+    search:{
+        PT_BR:'Pesquisar',
+        EN_US:'Search'
+    },
+    home:{
+        PT_BR:'Início',
+        EN_US:'Home'
+    },
+    information:{
+        PT_BR:'Info',
+        EN_US:'Info'
+    },
+    registration_performed:{
+        PT_BR:'Registro realizado',
+        EN_US:'Registration performed'
+    },
+    close:{
+        PT_BR:'Fechar',
+        EN_US:'Close'
+    },
+    search_results:{
+        PT_BR:'Resultados da pesquisa',
+        EN_US:'Search Results'
+    },
+    user_or_password_invalid:{
+        PT_BR:'Nome de usuário ou senha inválido',
+        EN_US:'User name or password invalid'
+    },
+    access_denied:{
+        PT_BR:'Acesso negado',
+        EN_US:'Access denied'
+    },
+    summary:{
+        PT_BR:'Sumário',
+        EN_US:'Summary'
+    },
+    users:{
+        PT_BR:'Usuários',
+        EN_US:'Users'
+    },
+    login:{
+        PT_BR:'Login',
+        EN_US:'Login'
+    },
+    technologies:{
+        PT_BR:'Tecnologias',
+        EN_US:'Tecnologies'
+    },
+    choose_all:{
+        PT_BR:'Escolher todos',
+        EN_US:'Choose all'
+    },
+    name:{
+        PT_BR:'Nome',
+        EN_US:'Name'
+    },
+    username:{
+        PT_BR:'Nome de usuário',
+        EN_US:'User name'
+    },
+    nickName:{
+        PT_BR:'Apelido',
+        EN_US:'Nick name'
+    },
+    edit:{
+        PT_BR:'Editar',
+        EN_US:'Edit'
+    },
+    delete:{
+        PT_BR:'Excluir',
+        EN_US:'Delete'
+    },
+    type:{
+        PT_BR:'Tipo',
+        EN_US:'Type'
+    },
+    description:{
+        PT_BR:'Descrição',
+        EN_US:'Description'
+    },
+    confirm_delete_user:{
+        PT_BR:'Confirma a exclusão do usuario?',
+        EN_US:'Confirm delete user?'
+    },
+    start_year:{
+        PT_BR:'Ano de início',
+        EN_US:'Start year'
+    },
+    user:{
+        PT_BR:'Usuário',
+        EN_US:'User'
+    },
+    technology:{
+        PT_BR:'Tecnologia',
+        EN_US:'Technology'
+    },
+    experiences:{
+        PT_BR:'Experiências',
+        EN_US:'Experiences'
+    },
+    edit_user:{
+        PT_BR:'Editar usuário',
+        EN_US:'Edit user'
+    },
+    user_saved:{
+        PT_BR:'Usuário salvo',
+        EN_US:'User saved'
+    },
+    nothing_changed:{
+        PT_BR:'Não há alterações a serem salvas',
+        EN_US:'Nothing changed'
+    },
+    waiting:{
+        PT_BR:'Aguardando',
+        EN_US:'Waiting'
+    },
+    include_experience:{
+        PT_BR:'Incluir experiência',
+        EN_US:'Include experience'
+    },
+    select_technology:{
+        PT_BR:'Selecionar tecnologia',
+        EN_US:'Select technology'
+    },
+    my_experiences:{
+        PT_BR:'Minhas experiências',
+        EN_US:'My experiences'
+    },
+    have_not_experiences:{
+        PT_BR:'Você não possui experiência',
+        EN_US:'You have not experience'
+    },
+    choose_technology:{
+        PT_BR:'Escolha uma tecnologia',
+        EN_US:'Choose a technology'
+    },
+    clients:{
+        PT_BR:'Clientes',
+        EN_US:'Clients'
+    },
+    edit_client:{
+        PT_BR:'Editar cliente',
+        EN_US:'Edit client'
+    }
+}

@@ -14,9 +14,10 @@ class JMount{
         [
             '_init',
             '_appends',
-            '_events',
             '_limits',
-            '_requests'
+            '_events',
+            '_requests',
+            
         ].forEach(mountMethod => this[mountMethod]?.())
     }
 }
@@ -133,6 +134,19 @@ class JView extends JMount{
     disapend_(... elements){
         elements.length? removeElements(this, elements) : disapend(this)
         return this
+    }
+
+    identifyContainerHints_(){
+        if(!this.containersForHints) this.containersForHints = [];
+        keysOf(this).forEach(key => {
+            if(/containerHints/.test(key)){
+                let container = this[key],
+                    identifier = key.split('containerHints')[1];
+                container.hintIdentifier = identifier[0].toLowerCase() + identifier.substring(1,)
+                container.c('containerHints')
+                this.containersForHints.push(container)
+            }
+        })
     }
 
 }
@@ -430,7 +444,7 @@ class Validation{
 class JWTSimpleParser{
     constructor(token){
         this.token = token;
-        this._jobToken = token;
+        this.jobToken = token;
         this._normalize()
         this._extractData()
     }
@@ -440,15 +454,15 @@ class JWTSimpleParser{
         this.prefix = ''
         if(parts.length == 2){
             this.prefix = parts[0] + ' '
-            this._jobToken = parts[1]
+            this.jobToken = parts[1]
         }
     }
 
     _extractData(){
-        let jwt = this._jobToken.split('.')
-        this._header = this._parse(jwt[0])
-        this._payload = this._parse(jwt[1])
-        this._signature = jwt[2]
+        let jwt = this.jobToken.split('.')
+        this.header = this._parse(jwt[0])
+        this.payload = this._parse(jwt[1])
+        this.signature = jwt[2]
     }
 
     _parse(tokenPart){
@@ -456,15 +470,15 @@ class JWTSimpleParser{
     }
 
     getHeader(headerName){
-        return headerName? this._header[headerName] : this._header
+        return headerName? this.header[headerName] : this.header
     }
 
     getClaim(claimName){
-        return this._payload[claimName]
+        return this.payload[claimName]
     }
 
     getPayload(){
-        return this._payload
+        return this.payload
     }
 
     getToken(){
@@ -474,9 +488,9 @@ class JWTSimpleParser{
     isExpired(){
         let now = new Date(),
             len = (now.getTime()+'').length,
-            exp = +(this._payload.exp+'').replace('.','').padEnd(len, '0').substring(0, 13);
-        if(!isNaN(exp)) return new Date(exp) < now;
-        return false
+            exp = this.payload.exp_? new Date(this.payload.exp_):
+                +(this.payload.exp+'').replace('.','').padEnd(len, '0').substring(0, 13);
+        return !isNaN(exp)? new Date(exp) < now: false;
     }
 }
 
@@ -613,17 +627,17 @@ function _create(tagName) {
     e.isTagChild = true
     e.a = (... elements) => appendTo(e, elements)
     e.c = (... classes) => addClasses(e, classes)
-    e.rmc = (... classes) => removeClasses(e, classes)
+    e.cls = (err = 'cls') => { throw (`[the element was not upgraded by function aMode: [e.${err} not avaliable]`)}
+    e.ck = (ck = true) => {e.checked = ck; return e}
     e.d = disabled => {e.disabled = disabled; return e}
     e.h = href => { setAttribute(e, ['href', href]); return e}
-    e.p = (placeHolder, value = null) => { setValueAndPlaceHolder(e, value, placeHolder); return e}
+    e.otv = (text, value) => {setTextAndValueToOption(e, text, value); return e}
+    e.p = (placeHolder) => { e.placeholder = placeHolder; return e}
     e.r = () => {e.required = true; return e}
+    e.rmc = (... classes) => removeClasses(e, classes)
+    e.rmcls = () => e.cls('rmcls')
     e.t = (text, isLastNode) => {setTextNode(e, text, isLastNode); return e}
     e.v = value => {setValue(e, value); return e}
-    e.ck = (ck = true) => {e.checked = ck; return e}
-    e.otv = (text, value) => {setTextAndValueToOption(e, text, value); return e}
-    e.cls = (err = 'cls') => { throw (`[the element was not upgraded by function aMode: [e.${err} not avaliable]`)}
-    e.rmcls = () => e.cls('rmcls')
     return e
 }
 
@@ -868,14 +882,21 @@ function jsonAsMatrix(json) {
     return {columns, rows};
 }
 
-function hide(element) {viewOrNode(element).style.display = 'none'}
+function hide(... elements) {elements.forEach(e => viewOrNode(e).style.display = 'none')}
 
-function show(element, typeDisplay) {viewOrNode(element).style.display = typeDisplay || ''}
+function show(elements, typeDisplay = '') {[elements].flat(Infinity).forEach(e => viewOrNode(e).style = 'display:'+typeDisplay)}
 
-function redirect(namePage, extension = 'html') {
-    let parts = namePage.split('.').length;
-    if(parts == 1) namePage = `${namePage}.${extension}`
-    window.location = namePage
+function hideShow(elementToHide, elementToShow, typeShowDisplay = '') {
+    hide(elementToHide); 
+    show(elementToShow, typeShowDisplay)
+}
+
+function redirect(namePage, urlParams = '') {
+    namePage = namePage.replace(new RegExp('(.*)\.html$'),'$1') + '.html';
+    if(typeof urlParams == 'object')
+        urlParams = keysOf(urlParams).map(key => `${key}=${urlParams[key]}`).join('&');
+    urlParams = urlParams? urlParams.replace(/^\??(.*)/, '?$1') : ''
+    window.location = namePage + urlParams
 }
 
 function removeChildren(node){
@@ -944,14 +965,16 @@ function readImgAsDataURL(imgFile, onload) {
     reader.readAsDataURL(imgFile)
 }   
 
-function imgPreview(inputFileImage, imgPrev, hideImgPreview, typeDisplay = '') {
+function imgPreview(inputFileImage, imgPrev, hideImgPreview, onafterchange, typeDisplay = '') {
     inputFileImage.onchange = () => {
-        let img = inputFileImage.files[0];
+        let files = inputFileImage.files,
+            img = files[0];
         hideImgPreview && hide(imgPrev)
         img && readImgAsDataURL(img, e => {
             imgPrev.src = e.target.result
             show(imgPrev, typeDisplay)
         })
+        onafterchange && onafterchange(img, files)
     }
 }
 
@@ -1047,3 +1070,6 @@ function urlParams(){
         },{});
 }
 
+function isMobileDevice() {
+    return /Mobi|Android/i.test(navigator.userAgent);
+}
