@@ -6,16 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.beans.factory.annotation.Value;
-
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,15 +24,15 @@ public class StandardError implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonIgnore
-    private long timestamp = System.currentTimeMillis();
+    private final long timestamp = System.currentTimeMillis();
 
-    private String path;
-    private HttpStatus httpStatus;
-    private String exception;
-    private String message;
-    private Map<String, List<String>> errors = new HashMap<>();
+    private final String path;
+    private final HttpStatusCode httpStatus;
+    private final String exception;
+    private final String message;
+    private final Map<String, List<String>> errors = new HashMap<>();
 
-    public StandardError(Exception exception, String requestedURI, HttpStatus httpStatus, String message){
+    public StandardError(Exception exception, String requestedURI, HttpStatusCode httpStatus, String message){
         this.exception = exception.getClass().getSimpleName();
         this.path = requestedURI;
         this.message = message != null ? message : exception.getMessage();

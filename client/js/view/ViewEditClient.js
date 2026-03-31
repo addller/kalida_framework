@@ -16,11 +16,11 @@ class ViewEditClient extends JView{
                 A.inputText('inputUpdateEmail').v(this.email)
             ),
             A.div('groupNames').a(
-                A.label('lblUsername').t(LANG.user_name+":").a(
+                A.label('lblUsername').t(LANG.username+":").a(
                     A.inputText('inputUpdateUsername').v(this.username)
                 ),
-                A.label('lblNickName').t(LANG.nickName+":").a(
-                    A.inputText('inputUpdateNickName').v(this.nickName)
+                A.label('lblNickname').t(LANG.nickname+":").a(
+                    A.inputText('inputUpdateNickname').v(this.nickname)
                 )
             ),
             A.label('lblLang').t(LANG.lang+":").a(
@@ -40,7 +40,7 @@ class ViewEditClient extends JView{
         this.$inputUpdateName.maxLength = 140
         this.$inputUpdateEmail.maxLength = 255
         this.$inputUpdateUsername.maxLength = 100
-        this.$inputUpdateNickName.maxLength = 100
+        this.$inputUpdateNickname.maxLength = 100
     }
 
     defineLanguage(){

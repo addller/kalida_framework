@@ -1,7 +1,7 @@
 class APIKalida extends APIBase{
 
     static API_IDENTIFIER = 'com_kalida_'
-    static NICK_NAME = 'nickname'
+    static NICKNAME = 'nickname'
     static TEXT_SEARCH = 'textSearch'
     static IMG_PERFIL = 'imgPerfil'
     static CLIENT_ID = 'clientId'
@@ -16,7 +16,7 @@ class APIKalida extends APIBase{
     setImagePerfil = imagePerfil => this.setInfo(APIKalida.IMG_PERFIL, JSON.stringify(imagePerfil))
     removeImagePerfil = () => this.removeInfo(APIKalida.IMG_PERFIL)
 
-    getUserId = () => this.getUser().userId_
+    getUserId = () => this.getUser().userId
 
     getClientId = () => JSON.parse(this.getInfo(APIKalida.CLIENT_ID))
     setClientId = clientId => this.setInfo(APIKalida.CLIENT_ID, clientId)

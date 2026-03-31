@@ -36,10 +36,6 @@ const LANG = {
         PT_BR:'Processando a requisição',
         EN_US:'Processing the request'
     },
-    user_name:{
-        PT_BR:'Nome de usuário',
-        EN_US:'User name'
-    },
     password:{
         PT_BR:'Senha',
         EN_US:'Password'
@@ -76,9 +72,25 @@ const LANG = {
         PT_BR:'Senha atual',
         EN_US:'Current password'
     },
+    cant_delete_yourself:{
+        PT_BR:'Você não pode excluir a si mesmo',
+        EN_US:'You can not delete yourself'
+    },
+    user_edit_profile_in_menu:{
+        PT_BR:'Edite seu perfil nas opções de menu',
+        EN_US:'Edit your profile in menu options'
+    },
+    confirm_password:{
+        PT_BR:'Confirmar senha',
+        EN_US:'Confirm password'
+    },
     invalid_current_password:{
         PT_BR:'Senha atual inválida',
         EN_US:'Invalid current password'
+    },
+    passwords_dont_match:{
+        PT_BR:'As senhas não conferem',
+        EN_US:'Passwords don\'t match'
     },
     lang:{
         PT_BR:'Idioma',
@@ -172,7 +184,7 @@ const LANG = {
         PT_BR:'Nome de usuário',
         EN_US:'User name'
     },
-    nickName:{
+    nickname:{
         PT_BR:'Apelido',
         EN_US:'Nick name'
     },

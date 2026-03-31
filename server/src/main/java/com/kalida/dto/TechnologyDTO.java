@@ -1,5 +1,7 @@
 package com.kalida.dto;
 
+import java.io.Serializable;
+
 import com.kalida.model.enums.TypeTechnology;
 
 import lombok.Getter;
@@ -9,7 +11,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TechnologyDTO {
+public class TechnologyDTO implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 

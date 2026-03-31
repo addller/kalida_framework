@@ -4,7 +4,6 @@ class ViewPageSearch extends JView{
     }
 
     _init(){
-
         A.div('view').a(
             A.div('groupSearchAndClose').a(
                 A.span('spanSearchResults').t(LANG.search_results.toUpperCase()),

@@ -2,15 +2,8 @@ package com.kalida.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,8 +11,16 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import net.minidev.json.JSONObject;
+import com.kalida.exception.StandardError;
+import com.kalida.model.User;
 
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import tools.jackson.databind.ObjectMapper;
+
+//aula 71, tem que implementar o AutheticationFailureHandler direto do github pra mudar o código de erro para 401
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
  
     private AuthenticationManager authenticationManager;
@@ -65,17 +66,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             
             response.setStatus(401);
             response.setContentType("application/json");
-            response.getWriter().append(json());
-        }
-
-        private String json(){
-            JSONObject json = new JSONObject();
-            json.put("timestamp", new Date().getTime());
-            json.put("status", 401);
-            json.put("error", "unauthorized");
-            json.put("message", "Email or password inválid");
-            json.put("path", "/login");
-            return json.toJSONString();
+            StandardError error = new StandardError(exception, request.getRequestURI(), HttpStatusCode.valueOf(401), "Email or password inválid");
+            response.getWriter().append(new ObjectMapper().writeValueAsString(error));
         }
 
     }

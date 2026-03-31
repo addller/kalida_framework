@@ -62,7 +62,8 @@ class ActionsMenu extends JMount{
     }
 
     requestImgPerfil(){
-
+        //not implemented in backend, but if it was, it would be like this:
+        return
         let userId = API_KALIDA.getUserId();
 
         JRequest.prepare(API_KALIDA.toImgPerfil(userId))

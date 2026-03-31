@@ -3,7 +3,7 @@ package com.kalida.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.kalida.security.User;
+import com.kalida.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 	

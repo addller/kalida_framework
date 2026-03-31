@@ -1,6 +1,7 @@
-package com.kalida.security;
+package com.kalida.service;
 
 import com.kalida.exception.DomainException;
+import com.kalida.model.User;
 import com.kalida.repository.UserRepository;
 
 import java.util.List;

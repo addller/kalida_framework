@@ -1,10 +1,5 @@
 package com.kalida.config;
 
-import static com.kalida.model.enums.TypeTechnology.FRAMEWORK;
-import static com.kalida.model.enums.TypeTechnology.OTHER;
-import static com.kalida.model.enums.TypeTechnology.PROGRAM_LANGUAGE;
-import static com.kalida.model.enums.TypeTechnology.SGBD;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -24,10 +19,14 @@ import com.kalida.dto.UserNewDTO;
 import com.kalida.model.Experience;
 import com.kalida.model.Notification;
 import com.kalida.model.Technology;
+import com.kalida.model.User;
 import com.kalida.model.enums.TypeLang;
+import static com.kalida.model.enums.TypeTechnology.FRAMEWORK;
+import static com.kalida.model.enums.TypeTechnology.OTHER;
+import static com.kalida.model.enums.TypeTechnology.PROGRAM_LANGUAGE;
+import static com.kalida.model.enums.TypeTechnology.SGBD;
 import com.kalida.repository.TechnologyRepository;
 import com.kalida.repository.UserRepository;
-import com.kalida.security.User;
 
 @Configuration
 @Profile("test")
@@ -64,7 +63,7 @@ public class ConfigTest {
 
         for (String name : names) {
             String lowerName = name.toLowerCase();
-            short lang = counter++ % 3 == 0 ? TypeLang.EN_US.getCod() : TypeLang.PT_BR.getCod();
+            TypeLang lang = counter++ % 3 == 0 ? TypeLang.EN_US : TypeLang.PT_BR;
             UserNewDTO userDTO = new UserNewDTO(lowerName + "_santos", lowerName, name + " Santos", password, lang,
                     lowerName + "@mail.com");
             User user = modelMapper.map(userDTO, User.class);

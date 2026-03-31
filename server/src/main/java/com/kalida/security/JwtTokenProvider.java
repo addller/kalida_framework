@@ -1,92 +1,89 @@
 package com.kalida.security;
 
+import java.security.Key;
+import java.time.LocalDateTime;
 import java.util.Base64;
-import java.util.Date;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-
+import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+import com.kalida.model.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class JwtTokenProvider {
-
-    @Autowired
-    private UserDetailsService userDetailService;
-
+    
     @Value("${jwt.secret}")
     private String secret;
 
-    @Value("${jwt.token.expire-after}")
-    private long validityInMilisseconds;
+    @Autowired
+    private String pepper;
 
-    public String createToken(User user) {
-        Claims claims = Jwts.claims()
-            .setSubject(user.getUsername());
+    @Value("${jwt.token.expire-after-seconds}")
+    private long expirationInSecond;
 
-        claims.put("roles", user.getRoles());
-        claims.put("userId_", user.getId());
-        claims.put("nick_name_", user.getNickName());
-        claims.put("lang_", user.getLang().getInitials());
+    private Key key;
+    
+    public String createToken(User user){
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expiration = now.plusSeconds(expirationInSecond);
 
-        Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilisseconds);
         return Jwts.builder()
-            .setClaims(claims)
-            .setIssuedAt(now)
-            .setExpiration(validity)
-            .signWith(SignatureAlgorithm.HS256, secret)
+            .claim("roles", user.getRoles())
+            .claim("userId", user.getId())
+            .claim("nickname", user.getNickname())
+            .claim("sub", user.getUsername())
+            .claim("lang_", user.getLang().name())
+            //.claim("iat", now.toString())
+            .claim("exp_", expiration.toString())
+            .signWith(key)
             .compact();
-    }
-
-    public boolean validateToken(String token) {
-        try {
-            Date expiration = getClaims(token).getExpiration();
-            Date now = new Date();
-            return now.before(expiration);
-        } catch (Exception e) {
-            throw new InvalidJwtAuthenticationException("Expired or invalid token");
-        }
-    }
-
-    public Authentication getAuthentication(String token) {
-        UserDetails userDetails = this.userDetailService.loadUserByUsername(getUsername(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
-    }
-
-    public String getUsername(String token) {
-        return getClaims(token).getSubject();
     }
 
     public Claims getClaims(String token){
         return Jwts.parser()
-        .setSigningKey(secret)
-        .parseClaimsJws(token)
-        .getBody();
+            .verifyWith((SecretKey) key)
+            .build()
+            .parseSignedClaims(token)
+            .getPayload();
     }
 
-    public String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.replace("Bearer ", "");
+    // get username from JWT token
+    public String getUsername(String token){
+        return getClaims(token).get("sub", String.class);
+    }
+
+    // validate JWT token
+    public boolean validateExpiration(String token){
+        String rawDate = getClaims(token)
+            .get("exp_", String.class);
+
+        LocalDateTime expiration = LocalDateTime.parse(rawDate);
+        return expiration.isAfter(LocalDateTime.now());
+    }
+
+    @PostConstruct
+    public void init() {
+        secret = Base64.getEncoder().encodeToString((pepper+secret).getBytes());
+        key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+    }
+
+    public String extractToken(HttpServletRequest request){
+        String header = request.getHeader("authorization");
+        header = header == null? request.getHeader("Authorization"): header;
+        if(header != null && header.startsWith("Bearer ")){
+            return header.substring(7);
         }
         return null;
     }
 
-
-    @PostConstruct
-    public void init() {
-        secret = Base64.getEncoder().encodeToString(("a$gN#Yj*LZ"+secret).getBytes());
-    }
 }

@@ -1,32 +1,28 @@
-package com.kalida.security;
+package com.kalida.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.kalida.model.Experience;
-import com.kalida.model.ImgPerfil;
-import com.kalida.model.Notification;
 import com.kalida.model.enums.TypeLang;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,11 +39,11 @@ public class User implements UserDetails {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_name", unique = true, length = 100)
+    @Column(name = "username", unique = true, length = 100)
     private String username;
 
-    @Column(name = "nick_name", unique = true, length = 100)
-    private String nickName;
+    @Column(name = "nickname", unique = true, length = 100)
+    private String nickname;
 
     @Column(nullable = false, length = 140)
     private String name;
@@ -132,7 +128,7 @@ public class User implements UserDetails {
     }
 
     public Long getId() {
-        return id == null ? 0 : id;
+        return id;
     }
 
     @Override
@@ -144,7 +140,7 @@ public class User implements UserDetails {
         result = prime * result + (credentialsNonExpired ? 1231 : 1237);
         result = prime * result + (enabled ? 1231 : 1237);
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
+        result = prime * result + ((nickname == null) ? 0 : nickname.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((permissions == null) ? 0 : permissions.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -182,11 +178,11 @@ public class User implements UserDetails {
         } else if (!id.equals(other.id)) {
             return false;
         }
-        if (nickName == null) {
-            if (other.nickName != null) {
+        if (nickname == null) {
+            if (other.nickname != null) {
                 return false;
             }
-        } else if (!nickName.equals(other.nickName)) {
+        } else if (!nickname.equals(other.nickname)) {
             return false;
         }
         if (password == null) {

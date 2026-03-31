@@ -12,7 +12,8 @@ class Aspect{
             ['JWT strings must contain exactly 2 period characters', _ => ActionsLogin.unlog()],
             ['JWT expired', _ => ActionsLogin.unlog()],
             ['Expired or invalid token', _ => ActionsLogin.unlog()],
-            ['JWT String argument cannot be null or empty', _ => ActionsLogin.unlog()]
+            ['JWT String argument cannot be null or empty', _ => ActionsLogin.unlog()],
+            ['Use edit profile in menu options to do this action', _ => toast(LANG.user_edit_profile_in_menu)]
         )
     }
 

@@ -1,5 +1,6 @@
 package com.kalida.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.kalida.model.enums.TypeLang;
@@ -11,13 +12,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserDTO {
+public class UserDTO implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
 
     private Long id;
 
     private String username;
 
-    private String nickName;
+    private String nickname;
 
     private String name;
 

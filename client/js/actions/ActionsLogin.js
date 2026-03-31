@@ -74,7 +74,6 @@ class ActionsLogin extends JMount{
             jwt = new JWTSimpleParser(token),
             userDetails = jwt.getPayload();
 
-        
         formLogin && API_KALIDA.removeUser()
         API_KALIDA.setUser(userDetails)
         API_KALIDA.setToken(token)

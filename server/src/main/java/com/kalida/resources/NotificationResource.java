@@ -1,24 +1,26 @@
-package com.kalida.controller;
+package com.kalida.resources;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kalida.exception.DomainException;
 import com.kalida.model.Notification;
-import com.kalida.security.User;
+import com.kalida.model.User;
 import com.kalida.service.NotificationService;
 
 
 @RestController
 @RequestMapping("/notification")
-public class ControllerNotification extends Controllable{
+public class NotificationResource extends Controllable{
 
     @Autowired
     private NotificationService notificationService;
@@ -30,11 +32,12 @@ public class ControllerNotification extends Controllable{
     }
 
     @PutMapping
-    public ResponseEntity<Void> setNotificationReaded(@RequestBody String id){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void setNotificationReaded(@RequestBody String id){
+        DomainException.validate(id != null && !id.isEmpty(), "Invalid notification ID", HttpStatus.BAD_REQUEST);
         Notification notification = notificationService.findById(Long.parseLong(id));
         notification.setReaded(true);
         notificationService.save(notification);
-        return noContent();
     }
     
 }

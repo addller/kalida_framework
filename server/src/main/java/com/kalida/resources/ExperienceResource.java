@@ -1,28 +1,35 @@
-package com.kalida.controller;
+package com.kalida.resources;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kalida.dto.ExperienceDTO;
-import com.kalida.dto.TechnologyDTO;
+import com.kalida.dto.ExperienceNewDTO;
 import com.kalida.model.Experience;
 import com.kalida.model.Technology;
-import com.kalida.security.User;
-import com.kalida.security.UserService;
+import com.kalida.model.User;
 import com.kalida.service.ExperienceService;
 import com.kalida.service.TechnologyService;
+import com.kalida.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/experience")
-public class ControllerExperience extends Controllable{
+public class ExperienceResource extends Controllable{
     
     @Autowired
     private ExperienceService experienceService;
@@ -37,10 +44,8 @@ public class ControllerExperience extends Controllable{
     private ModelMapper modelMapper;
 
     @PostMapping
-    public ExperienceDTO createExperience(@RequestBody ExperienceDTO experienceDTO){
+    public ExperienceDTO createExperience(@Valid @RequestBody ExperienceNewDTO experienceDTO){
         Technology technology = technologyService.findById(experienceDTO.getTechnology().getId());
-        experienceDTO.setTechnology(modelMapper.map(technology, TechnologyDTO.class));
-
         Experience experience = modelMapper.map(experienceDTO, Experience.class);
         experience.setTechnology(technology);
         experience.setUser(userService.findById(getUser().getId()));
@@ -57,5 +62,14 @@ public class ControllerExperience extends Controllable{
             .stream()
             .map(experience -> modelMapper.map(experience, ExperienceDTO.class))
             .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteExperience(@PathVariable Long id, HttpServletRequest request){
+        User userSaved = userService.findById(getUser().getId());
+        userSaved.getExperiences()
+            .removeIf(experienceFilter -> experienceFilter.getId().equals(id));
+        userService.save(userSaved);
     }
 }

@@ -1,6 +1,9 @@
 class ControllerClients extends JMount{
     constructor() {
-        super({userRows:[]}).mount_()
+        super({
+            userId: API_KALIDA.getUserId(),
+            userRows:[]
+        }).mount_()
     }
 
     _init() {
@@ -15,7 +18,7 @@ class ControllerClients extends JMount{
         JRequest.prepare(API_KALIDA.toUsers('all'))
             .inResponse(
                 clients => {
-                    jsonInMatrix(clients).forEach(client => {
+                    clients.forEach(client => {
                         let rowFunction = (row) => {
                             selector('.delete', row).onclick = _ => this.requestDeleteUser(client, row)
                             selector('.edit', row).onclick = _ => this.requestEditUser(client)
@@ -31,6 +34,11 @@ class ControllerClients extends JMount{
 
     requestDeleteUser(user, rowUser){
 
+        if(this.userId == user.id){
+            toast(LANG.cant_delete_yourself)
+            return
+        }
+
         let title = LANG.delete,
             message = LANG.confirm_delete_user;
         new Dialog(message, title, () => {
@@ -39,7 +47,6 @@ class ControllerClients extends JMount{
                 .inResponse(
                     _ => {
                         disapend(rowUser)
-                        this.viewClients.$viewTableUsers.zebrar()
                     },
                     error => new Aspect(error)
                 ).delete()
@@ -49,6 +56,10 @@ class ControllerClients extends JMount{
     }
 
     requestEditUser(user){
+        if(this.userId == user.id){
+            toast(LANG.user_edit_profile_in_menu)
+            return
+        }
         API_KALIDA.setClientId(user.id)
         redirect('edit_client')
     }

@@ -23,7 +23,12 @@ class ControllerSignUp extends JMount{
         $formSignUp.onsubmit = e => {
             consume(e)
             let source = viewSignUp.viewValues_(),
-                enderessable = API_KALIDA.toUsers();
+                enderessable = API_KALIDA.toUsers('register');
+
+            if(source.password != source.confirmPassword){
+                toast(LANG.passwords_dont_match)
+                return
+            }
 
             let waiter = new Waiter(LANG.waiting).hideDivAnimation()
             
@@ -37,13 +42,14 @@ class ControllerSignUp extends JMount{
                         waiter.free()
                         viewSignUp.$btnSignUp.d(false)
                     },
-                    _ => {
-                        $formSignUp.reset()
+                    (_, response) => {
 
+                        $formSignUp.reset()
                         let title = LANG.information,
                             message = LANG.registration_performed;
+                            
                         new Dialog(message, title, () => {
-                            redirect('index')
+                            ActionsLogin.saveLogin(response, $formSignUp)
                         }).hideBtnNegate(LANG.close).show();
                     },
                     error => {

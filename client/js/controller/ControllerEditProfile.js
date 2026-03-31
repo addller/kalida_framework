@@ -1,6 +1,6 @@
 class ControllerEditProfile extends JMount{
     constructor() {
-        super().mount_()
+        super({userId: API_KALIDA.getUserId()}).mount_()
     }
 
     _init() {
@@ -9,8 +9,7 @@ class ControllerEditProfile extends JMount{
     }
 
     _requests(){
-        let userId = API_KALIDA.getUser().userId_;
-        JRequest.prepare(API_KALIDA.toUsers(userId))
+        JRequest.prepare(API_KALIDA.toUsers(this.userId))
             .inResponse(
                 user => {
                     let viewContentEditProfile = new ViewContentEditProfile(user)
@@ -48,7 +47,6 @@ class ControllerEditProfile extends JMount{
 
                         let title = LANG.information,
                             message = LANG.user_saved;
-                        debugger
                         new Dialog(message, title, () => {
                             ActionsLogin.saveLogin(response, null, false)
                         }).hideBtnNegate(LANG.close).show();

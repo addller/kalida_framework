@@ -1,12 +1,13 @@
-body{
+.ViewInitialize_view{
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 3.6rem 1fr;
-    height: 99.4vh;
-    padding: 1px;
-    margin: 1px;
+    grid-template-rows: 3.6rem 1fr 2rem;
+    grid-template-areas: 
+        'menu'
+        'content'
+        'footer';
     gap: .1rem;
-    font-size: 1.5rem;
 }
 
 .ViewSignUp_view{
@@ -40,7 +41,7 @@ body{
 
 
 .ViewSignUp_inputUsername,
-.ViewSignUp_inputNickName,
+.ViewSignUp_inputNickname,
 .ViewSignUp_inputPassword,
 .ViewSignUp_inputLang{
     margin-left: 1rem;

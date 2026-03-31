@@ -1,11 +1,11 @@
-package com.kalida.controller;
+package com.kalida.resources;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,34 +14,41 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kalida.dto.UserDTO;
 import com.kalida.dto.UserNewDTO;
 import com.kalida.dto.UserProfileDTO;
-import com.kalida.response.CSV;
-import com.kalida.security.AuthController;
-import com.kalida.security.User;
-import com.kalida.security.UserService;
+import com.kalida.dto.UserUpadteProfileDTO;
+import com.kalida.exception.DomainException;
+import com.kalida.model.User;
+import com.kalida.service.UserService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
-public class ControllerUser extends Controllable{
+public class UserResource extends Controllable{
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private AuthController authController;
+    private AuthResource authController;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    @Value("${security.salt}")
-    private String salt;
+    @GetMapping("/all")
+    public List<UserDTO> findAll(){
+        return userService.findAll().stream()
+            .map(user -> modelMapper.map(user, UserDTO.class))
+            .toList();
+    }
 
-    @PostMapping
-    public ResponseEntity<Void> create(@RequestBody UserNewDTO userNewDTO) {
+    @PostMapping("/register")
+    public ResponseEntity<Void> create(@Valid @RequestBody UserNewDTO userNewDTO) {
         User user = modelMapper.map(userNewDTO, User.class);
         user.setPermissions(new ArrayList<>());
 
@@ -52,25 +59,12 @@ public class ControllerUser extends Controllable{
         User newUser = userService.save(user);
         return authController.createToken(newUser);
     }
-    
-    @GetMapping("/all")
-    public CSV getAll(){
-        Long userId = getUser().getId();
-        List<User> users = userService.findAll();
-        users.removeIf(user -> user.getId().equals(userId));
-        
-        CSV csv = new CSV("id", "name", "username", "nickName");
-        users.stream().forEach(user -> 
-            csv.addRow(user.getId(), user.getName(), user.getUsername(), user.getNickName())
-        );
-        return csv;
-    } 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
         User user = userService.findById(id);
         userService.delete(user);
-        return noContent();
     }
 
     @GetMapping("/{id}")
@@ -80,28 +74,25 @@ public class ControllerUser extends Controllable{
     }
 
     @PutMapping
-    public ResponseEntity<Void> editProfile(@RequestBody UserProfileDTO userDTO){
-        User user = saveUser(userDTO);
+    public ResponseEntity<Void> editProfile(@Valid @RequestBody UserUpadteProfileDTO userUpdateProfileDTO){
+        User userRequest = getUser();
+        User user = userService.findById(userRequest.getId());
+        modelMapper.map(userUpdateProfileDTO, user);
+        userService.save(user);
         return authController.createToken(user);
     } 
     
     //remove this end point
     @PutMapping("/other_profile")
-    public ResponseEntity<Void> editOtherProfile(@RequestBody UserProfileDTO userDTO){
-        saveUser(userDTO);
-        return noContent();
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void editOtherProfile(@Valid @RequestBody UserProfileDTO userDTO){
+        if(userDTO.getId().equals(getUser().getId())){
+            throw new DomainException("Use edit profile in menu options to do this action", HttpStatus.BAD_REQUEST);
+        }
+        User user = userService.findById(userDTO.getId());
+        modelMapper.map(userDTO, user);
+        userService.save(user);
     } 
 
-
-    private User saveUser(UserProfileDTO userProfileDTO){
-        User user = userService.findById(userProfileDTO.getId());
-        user.setName(userProfileDTO.getName());
-        user.setEmail(userProfileDTO.getEmail());  
-        user.setLang(userProfileDTO.getLang());
-        user.setNickName(userProfileDTO.getNickName());
-        user.setUsername(userProfileDTO.getUsername());
-        userService.save(user);
-        return user;
-    }
     
 }

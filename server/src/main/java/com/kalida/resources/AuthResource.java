@@ -1,11 +1,11 @@
-package com.kalida.security;
+package com.kalida.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,20 +17,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kalida.model.Password;
+import com.kalida.model.User;
 import com.kalida.repository.UserRepository;
+import com.kalida.security.AccountCredentials;
+import com.kalida.security.JwtTokenProvider;
+import com.kalida.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthResource extends Controllable{
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationConfiguration authenticationConfiguration;
+
+    @Autowired
+    private JwtTokenProvider tokenProvider;
 
     @Autowired
     UserService userService;
-
-    @Autowired
-    JwtTokenProvider tokenProvider;
 
     @Autowired
     UserRepository userRepository;
@@ -77,7 +81,8 @@ public class AuthController {
     }
 
     public void authenticate(String username, String password){
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password+salt));
+        authenticationConfiguration.getAuthenticationManager()
+             .authenticate(new UsernamePasswordAuthenticationToken(username, password+salt));
     }
 
     @GetMapping("/token/refresh")

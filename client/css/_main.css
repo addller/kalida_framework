@@ -137,10 +137,6 @@ body{
     cursor:pointer;
 }
 
-.JTable_zebrar{
-    background-color: #ddd;
-}
-
 .Validation_errorGroup{
     display: flex;
     flex-direction: column;
@@ -158,4 +154,8 @@ input[type=button],
 input[type=submit]{
     padding: .4rem;
     font-weight: bold;
+}
+
+tr:nth-child(even){
+    background-color: #ddd;
 }

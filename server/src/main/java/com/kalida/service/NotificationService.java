@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.kalida.exception.DomainException;
 import com.kalida.model.Notification;
+import com.kalida.model.User;
 import com.kalida.repository.NotificationRepository;
-import com.kalida.security.User;
 
 @Service
 public class NotificationService {

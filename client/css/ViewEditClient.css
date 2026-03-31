@@ -11,7 +11,7 @@
 .ViewEditClient_lblName,
 .ViewEditClient_lblEmail,
 .ViewEditClient_lblUsername,
-.ViewEditClient_lblNickName,
+.ViewEditClient_lblNickname,
 .ViewEditClient_lblLang{
     color: blue;
 }
@@ -24,7 +24,7 @@
 }
 
 .ViewEditClient_inputUpdateUsername,
-.ViewEditClient_inputUpdateNickName,
+.ViewEditClient_inputUpdateNickname,
 .ViewEditClient_inputUpdateLang{
     margin-left: 1rem;
 }

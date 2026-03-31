@@ -10,7 +10,7 @@
 .ViewEditProfile_lblName,
 .ViewEditProfile_lblEmail,
 .ViewEditProfile_lblUsername,
-.ViewEditProfile_lblNickName,
+.ViewEditProfile_lblNickname,
 .ViewEditProfile_lblLang{
     color: blue;
 }
@@ -23,7 +23,7 @@
 }
 
 .ViewEditProfile_inputUpdateUsername,
-.ViewEditProfile_inputUpdateNickName,
+.ViewEditProfile_inputUpdateNickname,
 .ViewEditProfile_inputUpdateLang{
     margin-left: 1rem;
 }

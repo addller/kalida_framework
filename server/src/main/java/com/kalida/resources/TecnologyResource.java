@@ -1,4 +1,4 @@
-package com.kalida.controller;
+package com.kalida.resources;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import com.kalida.service.TechnologyService;
 
 @RestController
 @RequestMapping("/technology")
-public class ControllerTecnology {
+public class TecnologyResource {
 
     @Autowired
     private TechnologyService technologyService;

@@ -16,9 +16,9 @@ class ViewClientDetails extends JView{
                 A.span('txtUsername').t(LANG.username+":"),
                 A.span('spanUsername').t(this.username)
             ),
-            A.div('groupNickName').a(
-                A.span('txtNickName').t(LANG.nickName+":"),
-                A.span('spanNickName').t(this.nickName)
+            A.div('groupNickname').a(
+                A.span('txtNickname').t(LANG.nickname+":"),
+                A.span('spanNickname').t(this.nickname)
             ),
             A.div('groupLang').a(
                 A.span('txtLang').t(LANG.lang+":"),

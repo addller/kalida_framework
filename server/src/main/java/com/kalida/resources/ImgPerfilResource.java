@@ -1,4 +1,4 @@
-package com.kalida.controller;
+package com.kalida.resources;
 
 import java.io.IOException;
 
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kalida.model.ImgPerfil;
-import com.kalida.security.User;
-import com.kalida.security.UserService;
+import com.kalida.model.User;
 import com.kalida.service.ImgPerfilService;
+import com.kalida.service.UserService;
 
 @RestController
 @RequestMapping("/img_perfil")
-public class ControllerImgPerfil extends Controllable{
+public class ImgPerfilResource extends Controllable{
 
     @Autowired
     private UserService userService;

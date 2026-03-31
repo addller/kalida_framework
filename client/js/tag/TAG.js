@@ -534,17 +534,6 @@ class JTable extends JView{
 
     getFootRow = () => this.$foot.firstChild
 
-    zebrar(startIndex = 1, step = 2){
-        this.getBodyRows().forEach((row, index) => {
-            this.removeClasses_(row, 'zebrar')
-            if(index == startIndex){
-                this.insertClasses_(row, 'zebrar')
-                startIndex += step
-            } 
-        })
-        return this
-    }
-
     setHeadRowFromItems(elements, applyItemFunction, applyRowFunction){
         return this._createRow(elements, applyRowFunction, applyItemFunction, this.setHeadRow, ['th'])
     }

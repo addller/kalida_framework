@@ -2,10 +2,10 @@ package com.kalida.security;
 
 import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,9 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+
+import io.jsonwebtoken.Claims;
+
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-    
     private UserDetailsService userDetailsService;
 
     private JwtTokenProvider jwtTokenProvider;
@@ -31,23 +33,39 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        String header = request.getHeader("Authorization");
-        if(header != null && header.startsWith("Bearer ")){
-            UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
-            if(auth != null){
-                SecurityContextHolder.getContext().setAuthentication(auth);
+        
+        String header = request.getHeader("authorization");
+        
+        header = header == null? request.getHeader("Authorization"): header;
+        try {
+            if(header != null && header.startsWith("Bearer ")){
+                UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
+                if(auth != null){
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
             }
+            chain.doFilter(request, response);
+            
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().print(e.getLocalizedMessage());
         }
-        chain.doFilter(request, response);
+        
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
-        if(jwtTokenProvider.validateToken(token)){
-            String username = jwtTokenProvider.getUsername(token);
-            UserDetails user = userDetailsService.loadUserByUsername(username);
-            return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+        try {
+            if(jwtTokenProvider.validateExpiration(token)){
+                Claims claims = jwtTokenProvider.getClaims(token);
+                String username = claims.getSubject();
+                UserDetails user = userDetailsService.loadUserByUsername(username);
+                return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());            
+            }
+            throw new InvalidJwtAuthenticationException("Expired JWToken");
+        } catch (Exception e) {
+            throw new InvalidJwtAuthenticationException("Invalid JWToken");
         }
-        return null;
     }
     
 }

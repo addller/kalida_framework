@@ -26,20 +26,18 @@ class ControllerTechnologies extends JMount{
     configureRowTecnology(rowTechnology, technology){
         this.deleteTecnology(rowTechnology, technology)
         this.editTechnology(rowTechnology, technology)
-        this.viewTechnologies.$viewTableTechnologies.zebrar()
     }
 
     deleteTecnology(rowTecnology, technology){
         selector('.delete', rowTecnology).onclick = _ => {
-            alert(technology.id+"delete")
+            alert(technology.id+" - delete clicked")
             disapend(rowTecnology)
-            this.viewTechnologies.$viewTableTechnologies.zebrar()
         }
     }
 
     editTechnology(rowTechnology, technology){
         selector('.edit', rowTechnology).onclick = _ =>{
-            alert(technology.id+"edit")
+            alert(technology.id+" - edit clicked")
         }
     }
 

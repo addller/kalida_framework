@@ -5,7 +5,7 @@
 
     _init() {
         A.form('formLogin').a([
-            A.label('lblUsername').t(LANG.user_name),
+            A.label('lblUsername').t(LANG.username),
             A.inputText('inputUsername').r(),
             A.label('lblPassword').t(LANG.password),
             A.inputPassword('inputPassword').r(),
