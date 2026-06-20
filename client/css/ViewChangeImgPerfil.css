@@ -1,0 +1,17 @@
+.ViewChangeImgPerfil_formChangeImgPerfil{
+    border: 3px solid green;
+    padding: 1rem;
+}
+
+.ViewChangeImgPerfil_btnChangeImgPerfil{
+    display: block;
+    margin-top: 1rem;
+    width: 11.6rem;
+    margin-bottom: 1rem;
+}
+
+.ViewChangeImgPerfil_imgPreview{
+    max-width: 40rem;
+    display: block;
+    margin: auto;
+}

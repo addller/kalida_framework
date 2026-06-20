@@ -1,0 +1,46 @@
+.ViewLogin_view{
+    border: 1px solid blue;
+    padding: .5rem;
+    margin: .2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    gap: .5rem;
+}
+
+.ViewLogin_lblPassword,
+.ViewLogin_lblUsername{
+    margin: .5rem 0 .3rem 0;
+    display: block;
+}
+
+.ViewLogin_inputUsername,
+.ViewLogin_inputPassword{
+    width: 95%;
+}
+
+.ViewLogin_inputPassword{
+    margin-bottom: .5rem;
+}
+
+.ViewLogin_groupButtons{
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.ViewLogin_btnSignIn,
+.ViewLogin_btnSignUp{
+    flex-grow: 1;
+}
+
+.ViewLogin_lblRecoverAccess{
+    cursor: pointer;
+    text-align: center;
+    display: block;
+}
+
+.ViewLogin_lblRecoverAccess:hover{
+    color: blue;
+}

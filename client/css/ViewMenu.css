@@ -1,0 +1,39 @@
+.ViewMenu_view{
+    display: flex;
+    align-content: center;
+    height: 100%;
+    margin: .4rem;
+}
+
+.ViewMenu_spanLogo{
+    background: url(../img/logo.png) no-repeat;
+    width: 4.4rem;
+    height: 2.7rem;
+    background-size: 4.4rem 2.7rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: .6rem;
+}
+
+.ViewMenu_iconSearch{
+    background: url(../img/sprite_icons_m.png) -9px -455px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-top: 2px solid rgba(0,0,0,0);
+    z-index: 2;
+    margin-left: 2rem;
+}
+
+.ViewMenu_inputSearch{
+    font-size: 1.4rem;
+    text-indent: 3.5rem;
+    height: 2.7rem;
+    margin-left: -3.4rem;
+    flex-grow: 1;
+    margin-right: 3rem;
+}
+
+.ViewMenu_inputLang{
+    height: 2.7rem;
+}

@@ -1,0 +1,16 @@
+.ViewContentExperience_view{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ViewContentExperience_txtMyExperiences,
+.ViewContentExperience_txtHaveNotExperiences{
+    text-align: center;
+}
+
+.ViewContentExperience_divExperiences{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

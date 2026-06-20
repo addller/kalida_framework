@@ -1,0 +1,6 @@
+.ViewRowNotification_view{
+    background-color: yellow;
+    padding: .4rem;
+    border-bottom: 1px solid black;
+    cursor: default;
+}
