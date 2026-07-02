@@ -7,9 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="img/logo.png">
         <link href="css/_commom.css" rel="stylesheet" type="text/css"/>
-        <link href="css/ViewPresentation.css" rel="stylesheet" type="text/css"/>
-        <link href="css/ViewSummary.css" rel="stylesheet" type="text/css"/>
-        <link href="css/ViewSubject.css" rel="stylesheet" type="text/css"/>
+        <link href="css/ViewChart.css" rel="stylesheet" type="text/css"/>
+        <link href="css/ControllerCharts.css" rel="stylesheet" type="text/css"/>
+        <!-- 1. Add Chart.js via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     </head>
     <body>
         <script src="js/tag/TAG.js"></script>
@@ -23,23 +25,21 @@
         <script src="js/actions/ActionsSearch.js"></script>
         <script src="js/actions/ActionsNavigation.js"></script>
         <script src="js/actions/ActionsLogin.js"></script>
-        
+
         <script src="js/view/ViewLogin.js"></script>
         <script src="js/view/ViewMenu.js"></script>
         <script src="js/view/ViewMenuItemUser.js"></script>
         <script src="js/view/ViewNavigation.js"></script>
         <script src="js/view/ViewPageSearch.js"></script>
         <script src="js/view/ViewRowNotification.js"></script>
-        
-        <script src="js/controller/ControllerSummary.js"></script>
-        <script src="js/view/ViewPresentation.js"></script>
-        <script src="js/view/ViewSummary.js"></script>
-        <script src="js/view/ViewSubject.js"></script>
 
+        <script src="js/data_set/tokio_olympics.js"></script>
+        <script src="js/controller/ChartController.js"></script>
+        <script src="js/view/ViewChart.js"></script>
 
         <script>
             Language.defineLang()
-            new ControllerSummary()
+            new ChartController()
         </script>
     </body>
 </html>

@@ -21,7 +21,7 @@ class ActionsLogin extends JMount{
             loggedIn = jwt && !jwt.isExpired();
             
         if(loggedIn){
-            if (this.inPageRegistrarCliente) return redirect('summary')
+            if (this.inPageRegistrarCliente) return redirect('charts')
             this.actionsMenu.requestNotifications()
             this.findNotificationsByInterval = setInterval(() => this.actionsMenu.requestNotifications(), 30000);
 
@@ -81,7 +81,7 @@ class ActionsLogin extends JMount{
         Language.setCodLang(userDetails.lang_)
 
         formLogin?.reset()
-        redirect_ && redirect('summary');
+        redirect_ && redirect('charts');
     }
 
     unlog(){

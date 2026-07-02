@@ -12,23 +12,24 @@ class ActionsNavigation extends JMount{
     }
 
     _events() {
-        this.ajustarExibicoes();
+        //this.ajustarExibicoes();
         let v = this.viewNavigation;
         v.$txtHome.onclick = _ => redirect('index')
         v.$txtSummary.onclick = _ => redirect('summary')
+        v.$txtChart.onclick = _ => redirect('charts')
     }
 
-    ajustarExibicoes() {
-        let v = this.viewNavigation;
-        switch (this.nameLocation) {
-            case 'index':
-                hide(v.$txtHome);
-                break;
-            case "summary":
-                hide(v.$txtSummary)
-                break
-        }
-    }
+    //ajustarExibicoes() {
+    //    let v = this.viewNavigation;
+    //    switch (this.nameLocation) {
+    //        case 'index':
+    //            hide(v.$txtHome);
+    //            break;
+    //        case "summary":
+    //            hide(v.$txtSummary)
+    //            break
+    //    }
+    //}
 
     displayItems(hasLoggin){
         hasLoggin ? show(this.viewNavigation) : hide(this.viewNavigation)

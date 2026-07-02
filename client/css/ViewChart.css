@@ -1,0 +1,12 @@
+.ViewChart_view {
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+}
+
+.ViewChart_chartType{
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    background-color: #f5f5f5;
+    margin-top: 0px;
+}

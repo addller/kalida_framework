@@ -4,7 +4,7 @@
     }
 
     _init() {
-        A.form('formLogin').a([
+        A.form('formLogin').a(
             A.label('lblUsername').t(LANG.username),
             A.inputText('inputUsername').r(),
             A.label('lblPassword').t(LANG.password),
@@ -14,7 +14,7 @@
                 A.inputSubmit('btnSignIn').v(LANG.sign_in)
             ),
             A.label('lblRecoverAccess').t(LANG.recover_access)
-        ])
+        )
 
         this.$inputUsername.value = 'andrew_santos'
         this.$inputPassword.value = '#0xCUSTOM'

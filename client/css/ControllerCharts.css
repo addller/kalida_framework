@@ -1,0 +1,10 @@
+.additional_info{
+    text-indent: 2rem;
+    margin-top: 2rem;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+.additional_info h3{
+    text-align: center;
+}

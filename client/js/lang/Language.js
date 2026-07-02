@@ -108,6 +108,10 @@ const LANG = {
         PT_BR:'Adicionar',
         EN_US:'Add'
     },
+    charts:{
+        PT_BR:'Gráficos',
+        EN_US:'Charts'
+    },
     update:{
         PT_BR:'Atualizar',
         EN_US:'Update'

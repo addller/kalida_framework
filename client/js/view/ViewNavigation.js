@@ -12,7 +12,11 @@ class ViewNavigation extends JView{
             A.p("txtSummary").cls('item').a(
                 A.span("iconSummary"),
                 A.span('spanSummary').t(LANG.summary),
-            )
+            ),
+            A.p("txtChart").cls('item').a(
+                A.span("iconChart"),
+                A.span('spanChart').t(LANG.charts),
+            ),
         ])
     }
 }

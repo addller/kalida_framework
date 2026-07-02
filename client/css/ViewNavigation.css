@@ -4,8 +4,11 @@
     flex-direction: column;
     gap: .5rem;
 }
+
+/*necessary add url to icons here*/
 .ViewNavigation_iconHome,
-.ViewNavigation_iconSummary{
+.ViewNavigation_iconSummary,
+.ViewNavigation_iconChart{
     background: url(../img/sprite_icons_m.png);
     margin-left: .6rem;
     width: 30px;
@@ -35,4 +38,8 @@
 
 .ViewNavigation_iconSummary{
     background-position: -18px -308px;
+}
+
+.ViewNavigation_iconChart{
+    background-position: -288px -421px;
 }

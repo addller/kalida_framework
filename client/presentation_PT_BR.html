@@ -6,6 +6,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="img/logo.png">
+        <!-- 1. Adicionando o Chart.js via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
             h3{
                 color: blue;
@@ -18,5 +20,27 @@
         <p>O kalida é um framework voltado à criação de views de forma rápida e intuitiva.</p>
         <p>Para conhecer as regras de utilização e sua implementação, dê uma olhada na documentação do framework.</p>
         <p>Para conhecer algumas codificações, habilite o servidor e faça o login..</p>
+
+        <div style="width: 400px; height: 400px;">
+            <canvas id="meuGrafico"></canvas>
+        </div>
+
+    <script>
+        // 3. Pegando o elemento do canvas
+        const ctx = document.getElementById('meuGrafico').getContext('2d');
+
+        // 4. Criando e configurando o gráfico
+        const meuGrafico = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico: barras
+            data: {
+                labels: ['Janeiro', 'Fevereiro', 'Março'], // Legendas
+                datasets: [{
+                    label: 'Evolução Mensal', // Nome do conjunto de dados
+                    data: [10, 20, 30], // Os números do gráfico
+                    backgroundColor: ['blue', 'red', 'green'] // Cores das barras
+                }]
+            }
+        });
+    </script>
     </body>
 </html>
