@@ -9,6 +9,8 @@
         <link href="css/_commom.css" rel="stylesheet" type="text/css"/>
         <link href="css/ViewChart.css" rel="stylesheet" type="text/css"/>
         <link href="css/ControllerCharts.css" rel="stylesheet" type="text/css"/>
+        <link href="css/ViewTokioOlympicOptions.css" rel="stylesheet" type="text/css"/>
+        <link href="css/ViewRowSelectedCountry.css" rel="stylesheet" type="text/css"/>
         <!-- 1. Add Chart.js via CDN -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -34,12 +36,14 @@
         <script src="js/view/ViewRowNotification.js"></script>
 
         <script src="js/data_set/tokio_olympics.js"></script>
-        <script src="js/controller/ChartController.js"></script>
+        <script src="js/view/ViewTokioOlympicOptions.js"></script>
+        <script src="js/view/ViewRowSelectedCountry.js"></script>
+        <script src="js/controller/ChartsController.js"></script>
         <script src="js/view/ViewChart.js"></script>
 
         <script>
             Language.defineLang()
-            new ChartController()
+            new ChartsController()
         </script>
     </body>
 </html>

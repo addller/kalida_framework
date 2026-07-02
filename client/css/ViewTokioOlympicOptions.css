@@ -1,0 +1,22 @@
+.ViewTokioOlympicOptions_view{
+    margin: auto;
+    color: blue;
+    border: 1px solid blue;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ViewTokioOlympicOptions_view label{
+    margin: .5rem 1rem;
+    display: inline-block;
+}
+
+.ViewTokioOlympicOptions_btnReloadCharts{
+    width: 30.1rem;
+}
+
+.ViewTokioOlympicOptions_inputCountry{
+    width: 29.2rem;
+    text-align: center;
+}
