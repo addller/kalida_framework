@@ -5,10 +5,7 @@
     gap: .5rem;
 }
 
-/*necessary add url to icons here*/
-.ViewNavigation_iconHome,
-.ViewNavigation_iconSummary,
-.ViewNavigation_iconChart{
+.ViewNavigation_item > span:nth-child(1){
     background: url(../img/sprite_icons_m.png);
     margin-left: .6rem;
     width: 30px;
@@ -32,14 +29,17 @@
     padding-top: .5rem;
     border-radius: 5px;
 }
+
 .ViewNavigation_iconHome{
-    background-position: -17px -237px;
+    background-position: -16px -237px !important;
 }
 
 .ViewNavigation_iconSummary{
-    background-position: -18px -308px;
+    background-position: -17px -308px !important;
 }
 
 .ViewNavigation_iconChart{
-    background-position: -288px -421px;
+    background-position: -290px -421px !important;
+    rotate: 90deg;
+    transform: scaleX(-1);
 }
