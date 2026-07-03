@@ -306,6 +306,7 @@ class JRequest{
     get = _ => this.send('GET')
     put = _ => this.send('PUT')
     delete = _ => this.send('DELETE')
+    query = _ => this.send('QUERY')
     
     addHeaders(...headers){
         let newHeaders = headers.flat(Infinity).map(header => {
@@ -533,6 +534,17 @@ class JTable extends JView{
     getBodyRows = () => [... this.$body.children]
 
     getFootRow = () => this.$foot.firstChild
+
+    zebrar(startIndex = 1, step = 2){
+        this.getBodyRows().forEach((row, index) => {
+            this.removeClasses_(row, 'zebrar')
+            if(index == startIndex){
+                this.insertClasses_(row, 'zebrar')
+                startIndex += step
+            } 
+        })
+        return this
+    }
 
     setHeadRowFromItems(elements, applyItemFunction, applyRowFunction){
         return this._createRow(elements, applyRowFunction, applyItemFunction, this.setHeadRow, ['th'])
