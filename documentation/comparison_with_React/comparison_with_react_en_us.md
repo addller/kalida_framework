@@ -1,6 +1,6 @@
 This conversation took place with an LLM, using React as a point of comparison.
 
-If you only want to know about the innovative features, go to: The Real Innovations of Kalida Script.
+If you only want to know about the innovative features, go to: Kalida Script’s Genuine Innovations.
 
 You can also skip to the reference guide: Quick Reference Guide: React vs. Kalida Script.
 
@@ -135,7 +135,7 @@ Code in Kalida Script (Based on the repository structure)
 <!-- HTML structure -->
 <div id="app-contador">
   <p id="texto-contador">Total: 0</p>
-  <button id="btn-incrementar">Incrementar</button>
+  <button id="btn-increment">Incrementar</button>
 </div>
 
 <!-- Kalida Script / Client JS Logic -->
@@ -145,7 +145,7 @@ Code in Kalida Script (Based on the repository structure)
 
   // Selection of DOM elements
   const textoContador = document.getElementById('texto-contador');
-  const btnIncrementar = document.getElementById('btn-incrementar');
+  const btnIncrementar = document.getElementById('btn-increment');
 
   // Manual rendering function (UI update)
   function render() {
@@ -478,6 +478,10 @@ Typing and Autocomplete (IntelliSense): In React, using TypeScript—or even pla
 
 String Handling and Magic IDs: Passing an element's name as a string (e.g., `A.form("formLogin")`) creates subtle coupling. If you change the string inside `_init()`, you must remember to manually update the corresponding event call (e.g., `viewLogin.$formLogin`) outside the class. This opens the door to errors that React avoids by centralizing variables within the function scope.
 
+[[
+    Note: Unlike the LLM evaluation, Kalida is able to build complex forms in a standardized and efficient manner.
+]]
+
 Technical Comparison Summary
 
 Your implementation demonstrates that Kalida Script eliminates the middleman. React was designed to handle highly dynamic interfaces where dozens of UI components must react instantly to the same data. For forms, login screens, and web management systems, Kalida’s object-oriented approach is arguably lighter and more direct, consuming a fraction of the memory React requires.
@@ -658,11 +662,13 @@ Below are the key features that distinguish Kalida from standard Vanilla JS libr
 
 ## Kalida Script’s Genuine Innovations
 
-*   **Automated Triple Assignment:** In traditional imperative libraries (like jQuery or pure Vanilla JS), you must create an element and then manually retrieve it or assign it to a variable. Kalida innovates by transforming the act of declaring a component (e.g., `A.inputEmail('meuInput')`) into the automatic creation of an instance property (e.g., `this.$meuInput`). This completely eliminates repetitive DOM selection code.
+*   **Automated Triple Assignment:** In traditional imperative libraries (like jQuery or pure Vanilla JS), you must create an element and then manually retrieve it or assign it to a variable. Kalida innovates by transforming the act of declaring a component (e.g., `A.inputEmail('myInput')`) into the automatic creation of an instance property (e.g., `this.$myInput`). This completely eliminates repetitive DOM selection code.
 
 *   **Total Abolition of Static HTML:** Frameworks like Angular, Vue, and Svelte attempt to extend HTML using directives. React uses JSX (JavaScript that transforms into object structures). Kalida innovates by removing HTML from the development workflow entirely. Everything—from structure and logic to event binding—is generated via method chaining in JavaScript at runtime, keeping the code 100% centered on pure objects.
 
-*   **State-Agnostic Data Extraction (`viewValues_()`):** In modern frameworks, reading form data requires creating mirrored states in memory for every field. Kalida innovates by intelligently using the DOM itself as the "source of truth": you do not manage state while the user types; instead, the method reads and encapsulates all values ​​into a structured object at the precise moment of the click. * Style Isolation via Class Naming Convention: Without requiring compilers like Webpack or PostCSS to generate complex hashes, Kalida resolves CSS conflicts by leveraging the View's class name scope (e.g., `.ViewLogin_view`). It is an architectural innovation based on native naming standardization.
+*   **State-Agnostic Data Extraction (`viewValues_()`):** In modern frameworks, reading form data requires creating mirrored states in memory for every field. Kalida innovates by intelligently using the DOM itself as the "source of truth": you do not manage state while the user types; instead, the method reads and encapsulates all values ​​into a structured object at the precise moment of the click. 
+
+* Style Isolation via Class Naming Convention: Without requiring compilers like Webpack or PostCSS to generate complex hashes, Kalida resolves CSS conflicts by leveraging the View's class name scope (e.g., `.ViewLogin_view`). It is an architectural innovation based on native naming standardization.
 
 ## Why it looks like "more of the same" to some (The perception barrier)
 
