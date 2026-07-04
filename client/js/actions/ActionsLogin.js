@@ -12,6 +12,7 @@ class ActionsLogin extends JMount{
         this.viewLogin = new ViewLogin()
         this.mount_()
         ActionsLogin.unlog = _ => this.unlog()
+        this.cachePolicy()
         this.refreshToken()
     }
 
@@ -102,5 +103,14 @@ class ActionsLogin extends JMount{
                 ).get()
             }
         }, ActionsLogin.REFRESH_TOKEN_PERIOD)
+    }
+
+    cachePolicy(){
+        let cachePolicy = this.loginRequired? "cache" : "no-cache";
+        JRequest.prepare(API_KALIDA.toAuth(cachePolicy))
+            .inResponse(
+                onsuccess => {},
+                error => new Aspect(error),
+        ).get()
     }
 }

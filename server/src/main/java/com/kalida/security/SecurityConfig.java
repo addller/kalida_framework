@@ -47,7 +47,9 @@ public class SecurityConfig{
     
     private static final String[] PUBLIC_MATCHERS_GET = {
         "/auth/email/confirmation",
-        "/auth/email/validation"
+        "/auth/email/validation",
+        "/auth/cache",
+        "/auth/no-cache"
     };
     
     private static final String[] PUBLIC_MATCHERS_POST = {

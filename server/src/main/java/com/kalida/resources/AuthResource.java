@@ -42,6 +42,9 @@ public class AuthResource extends Controllable{
     @Value("${security.salt}")
     private String salt;
 
+    @Value("${cache-control.max-age}")
+    private int cacheMaxAge;
+
     @PostMapping("/signin")
     public ResponseEntity<Void> signin(@RequestBody AccountCredentials data) {
         try {
@@ -75,9 +78,9 @@ public class AuthResource extends Controllable{
     public ResponseEntity<Void> createToken(User user) {
         String token = tokenProvider.createToken(user);
         return ResponseEntity.noContent()
-                .header("access-control-expose-headers", "Authorization")
-                .header("Authorization", "Bearer " + token)
-                .build();
+            .header("access-control-expose-headers", "Authorization")
+            .header("Authorization", "Bearer " + token)
+            .build();
     }
 
     public void authenticate(String username, String password){
@@ -95,5 +98,22 @@ public class AuthResource extends Controllable{
         return new BCryptPasswordEncoder(16).encode(password + salt);
     }
 
+    @GetMapping("/no-cache")
+    public ResponseEntity<Void> noCache() {
+        return ResponseEntity.noContent()
+            .header("Cache-Control", "no-cache, must-revalidate")
+            .header("Pragma", "no-cache")
+            .header("Expires", "0")
+            .build();
+    }
+
+    @GetMapping("/cache")
+    public ResponseEntity<Void> cache() {
+        return ResponseEntity.noContent()
+            .header("Cache-Control", "max-age=" + cacheMaxAge + ", must-revalidate")
+            .header("Pragma", "cache")
+            .header("Expires", "" + (System.currentTimeMillis() + cacheMaxAge * 1000))
+            .build();
+    }
 
 }
