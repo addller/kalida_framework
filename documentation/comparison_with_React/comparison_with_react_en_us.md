@@ -4,6 +4,8 @@ If you only want to know about the innovative features, go to: Kalida Script’s
 
 You can also skip to the reference guide: Quick Reference Guide: React vs. Kalida Script.
 
+If in doubt, consult the discussion in comparison_with_react_pt_br.md.
+
 ME:
 
 

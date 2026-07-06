@@ -4,7 +4,6 @@ Se deseja saber somente os pontos inovadores, vá até: As Reais Inovações do 
 
 Você também pode pular para o guia de referência: Guia de Referência Rápida: React vs. Kalida Script.
 
-If in doubt, consult the discussion in comparison_with_react_pt_br.md.
 
 ME:
 
