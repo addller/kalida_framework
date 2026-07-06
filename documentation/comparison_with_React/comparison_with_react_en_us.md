@@ -6,6 +6,7 @@ You can also skip to the reference guide: Quick Reference Guide: React vs. Kalid
 
 If in doubt, consult the discussion in comparison_with_react_pt_br.md.
 
+
 ME:
 
 
@@ -135,8 +136,8 @@ Code in Kalida Script (Based on the repository structure)
 
 ´´´
 <!-- HTML structure -->
-<div id="app-contador">
-  <p id="texto-contador">Total: 0</p>
+<div id="app-counter">
+  <p id="text-counter">Total: 0</p>
   <button id="btn-increment">Incrementar</button>
 </div>
 
@@ -146,16 +147,16 @@ Code in Kalida Script (Based on the repository structure)
   let valor = 0;
 
   // Selection of DOM elements
-  const textoContador = document.getElementById('texto-contador');
-  const btnIncrementar = document.getElementById('btn-increment');
+  const textoCounter = document.getElementById('text-counter');
+  const btnIncrement = document.getElementById('btn-increment');
 
   // Manual rendering function (UI update)
   function render() {
-    textoContador.textContent = `Total: ${valor}`;
+    textoCounter.textContent = `Total: ${valor}`;
   }
 
   // Event listener to modify the data and force re-rendering
-  btnIncrementar.addEventListener('click', () => {
+  btnIncrement.addEventListener('click', () => {
     valor++;
     render(); 
   });
@@ -226,7 +227,7 @@ Note: Although Kalida supports this initial implementation, the advantage lies i
 }
             
     let viewCounter = new Counter();
-    viewCounter.$btn.onclick = _ => viewCounter.$total.text(`Total: ${++viewCounter.counter}`);
+    viewCounter.$btn.onclick = _ => viewCounter.$total.t(`Total: ${++viewCounter.counter}`);
     body().a(viewCounter.$view);
 </script> // 20 lines, but infinitely easier to maintain thanks to the triple assignment concept and browser-based visual identification.
 
@@ -259,7 +260,7 @@ You hit the nail on the head: hooks like `useState` introduce lifecycle complexi
 
 *
 
-* In Kalida, data changes within the class object's memory (`this.counter++`), and the interface is surgically updated at that exact moment using chained methods (like `.text()` or `.t()`).
+* In Kalida, data changes within the class object's memory (`this.counter++`), and the interface is surgically updated at that exact moment using chained methods (like `.t()`).
 
 * There is no need to compare an entire virtual tree (Virtual DOM) to detect changes; the event already knows exactly what triggered the action and which variable needs to reflect that change.
 
